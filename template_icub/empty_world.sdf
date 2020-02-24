@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="default">
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>-11.82075 -19.38429 17.2198 0 -0 0</pose>
+      <diffuse>0.7 0.7 0.7 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>0.3698 0.4 -0.5</direction>
+    </light>
+    <model name="ground">
+      <static>true</static>
+      <link name="link">
+        <visual name="visual">
+          <cast_shadows>false</cast_shadows>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+           <mesh>
+              <uri>model://empty_world/meshes/emptyworldground.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="collision">
+          <pose>0 0 0.016 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>22.938 22.954 0.016</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name='nrppanel'>
+      <static>true</static>
+      <pose>-3.84038 3.49072 -1.79562 0 0 1.55</pose>
+      <include>
+          <uri>model://nrp_panel</uri>
+      </include>
+    </model>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+  </world>
+</sdf>
