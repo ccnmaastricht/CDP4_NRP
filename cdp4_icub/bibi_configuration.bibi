@@ -7,8 +7,4 @@
     <ns1:populations from="0" population="record" to="2" xsi:type="ns1:Range" />
   </ns1:brainModel>
   <ns1:bodyModel robotId="icub">icub_model/model.sdf</ns1:bodyModel>
-  <ns1:transferFunction src="tf/all_neurons_spike_monitor.py" xsi:type="ns1:PythonTransferFunction" />
-  <ns1:transferFunction src="tf/turn_eyes.py" xsi:type="ns1:PythonTransferFunction" />
-  <ns1:transferFunction src="tf/grab_image.py" xsi:type="ns1:PythonTransferFunction" />
-  <ns1:transferFunction src="tf/joint_states_passthrough.py" xsi:type="ns1:PythonTransferFunction" />
 </ns1:bibi>

@@ -1,8 +1,8 @@
 <ExD 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xmlns="http://schemas.humanbrainproject.eu/SP10/2014/ExDConfig" xsi:schemaLocation="http://schemas.humanbrainproject.eu/SP10/2014/ExDConfig ../ExDConfFile.xsd">
-  <name>Template iCub in empty environment</name>
-  <thumbnail>ExDTemplateICub.jpg</thumbnail>
+  <name>CDP4 ICub Experiment</name>
+  <thumbnail>CDP4_ICub.png</thumbnail>
   <description>This experiment loads the iCub robot in an empty world, with an idle brain and basic transfer functions. You are free to edit it.</description>
   <tags>icub robotics template empty</tags>
   <timeout>18000</timeout>
@@ -11,7 +11,7 @@
   <configuration type="user-interaction-settings" src="config/ExDTemplateICub.uis" />
   <maturity>production</maturity>
   <environmentModel src="empty_world.sdf">
-    <robotPose robotId="icub" x="0.0" y="0.0" z="0.8" roll="0.0" pitch="-0.0" yaw="2.29524196972" />
+    <robotPose robotId="icub" x="0.0" y="0.0" z="0.65" roll="0.0" pitch="-0.0" yaw="2.29524196972" />
   </environmentModel>
   <bibiConf src="bibi_configuration.bibi" />
   <cameraPose>
