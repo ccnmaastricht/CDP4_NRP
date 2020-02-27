@@ -4,9 +4,9 @@ import numpy as np
 
 from sensor_msgs.msg import Image
 from geometry_msgs.msg import Pose
-from gazebo_msgs.msg import ModelStates
+from gazebo_msgs.msg import ModelState, ModelStates
 from cv_bridge import CvBridge, CvBridgeError
-from gazebo_msgs.srv import GetWorldProperties, SpawnEntity, DeleteModel, SetModelState
+from gazebo_msgs.srv import GetModelState, GetWorldProperties, SpawnEntity, DeleteModel
 from tf.transformations import quaternion_from_euler, euler_from_quaternion
 
 
@@ -35,21 +35,22 @@ class CDP4DataCollection:
         self.__image_sub = rospy.Subscriber("/icub/icub_model/left_eye_camera/image_raw", Image,
                                             self.__image_callback, queue_size=1)
 
+        # ROS Publishers
+        self.__set_model_state_pub = rospy.Publisher("/gazebo/set_model_state", ModelState,
+                                                     queue_size=1)
+
         # ROS Services
+        rospy.wait_for_service("gazebo/get_model_state", 10.0)
+        self.__get_pose_srv = rospy.ServiceProxy("gazebo/get_model_state", GetModelState)
+
         rospy.wait_for_service("gazebo/spawn_sdf_entity")
-        self.__spawn_model_srv = rospy.ServiceProxy("/gazebo/spawn_sdf_entity", SpawnEntity):
+        self.__spawn_model_srv = rospy.ServiceProxy("/gazebo/spawn_sdf_entity", SpawnEntity)
+
         rospy.wait_for_service("gazebo/delete_model")
         self.__delete_model_srv = rospy.ServiceProxy("/gazebo/delete_model", DeleteModel)
-        
-        rospy.wait_for_service("gazebo/set_model_state")
-        self.__set_model_srv = rospy.ServiceProxy("/gazebo/set_model_state", SetModelState)
-
-        rospy.wait_for_service("gazebo/get_model_state")
-        self.__get_model_srv = rospy.ServiceProxy("/gazebo/get_model_state", GetModelState)
 
     @staticmethod
-    def generate_random_pose(x_min=-0.5, x_max=2.5, y_min=-3.0, y_max=3.0, z_min=0.5,
-            z_max=2.0):
+    def generate_random_pose(x_min=-0.5, x_max=2.5, y_min=-3.0, y_max=3.0, z_min=0.5, z_max=2.0):
         """
         Generates a random pose within the specified xyz limits.
         """
@@ -99,13 +100,9 @@ class CDP4DataCollection:
             model_name = "_".join(parts)
 
         res = self.__spawn_model_srv(model_name, sdf, "", pose, reference_frame)
+        self.spawned_objects.append(model_name)
         rospy.loginfo(res)
 
-    def spawn_object(self, model_name, pose):
-        
-        self.spawned_objects.append(model_name)
-        res = self.__set_model_srv(model_name, pose)
-    
     def delete_object(self, model_name):
         """
         Deletes a model from the environment
@@ -116,6 +113,31 @@ class CDP4DataCollection:
             self.__delete_model_srv(model_name)
         except:
             rospy.logerr("In delete model: %s" % model_name)
+
+    def get_object_pose(self, object_name, reference_frame='world'):
+        """
+        Gets the current pose of an object relative to the world's coordinate frame
+
+        :param object_name: the model name of the object
+        :param reference_frame: the reference frame from which the pose will be calculated
+        """
+        return self.__get_pose_srv(object_name, reference_frame).pose
+
+    def set_object_pose(self, object_name, pose):
+        """
+
+        :param object_name: the name of the object model
+        :param pose: the new pose to model should be set to
+        """
+        msg = ModelState()
+
+        msg.model_name = object_name
+        msg.reference_frame = 'world'
+        msg.pose = pose
+        msg.scale.x = msg.scale.y = msg.scale.z = 1.0
+
+        # publish message on ros topic
+        self.__set_model_state_pub.publish(msg)
 
     def capture_image(self):
         """
