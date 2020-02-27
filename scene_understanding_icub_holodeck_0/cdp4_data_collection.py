@@ -6,7 +6,7 @@ from sensor_msgs.msg import Image
 from geometry_msgs.msg import Pose
 from gazebo_msgs.msg import ModelStates
 from cv_bridge import CvBridge, CvBridgeError
-from gazebo_msgs.srv import GetWorldProperties, SpawnEntity, DeleteModel
+from gazebo_msgs.srv import GetWorldProperties, SpawnEntity, DeleteModel, SetModelState
 from tf.transformations import quaternion_from_euler, euler_from_quaternion
 
 
@@ -37,10 +37,15 @@ class CDP4DataCollection:
 
         # ROS Services
         rospy.wait_for_service("gazebo/spawn_sdf_entity")
-        self.__spawn_model_srv = rospy.ServiceProxy("/gazebo/spawn_sdf_entity", SpawnEntity)
-
+        self.__spawn_model_srv = rospy.ServiceProxy("/gazebo/spawn_sdf_entity", SpawnEntity):
         rospy.wait_for_service("gazebo/delete_model")
         self.__delete_model_srv = rospy.ServiceProxy("/gazebo/delete_model", DeleteModel)
+        
+        rospy.wait_for_service("gazebo/set_model_state")
+        self.__set_model_srv = rospy.ServiceProxy("/gazebo/set_model_state", SetModelState)
+
+        rospy.wait_for_service("gazebo/get_model_state")
+        self.__get_model_srv = rospy.ServiceProxy("/gazebo/get_model_state", GetModelState)
 
     @staticmethod
     def generate_random_pose(x_min=-0.5, x_max=2.5, y_min=-3.0, y_max=3.0, z_min=0.5,
@@ -94,9 +99,13 @@ class CDP4DataCollection:
             model_name = "_".join(parts)
 
         res = self.__spawn_model_srv(model_name, sdf, "", pose, reference_frame)
-        self.spawned_objects.append(model_name)
         rospy.loginfo(res)
 
+    def spawn_object(self, model_name, pose):
+        
+        self.spawned_objects.append(model_name)
+        res = self.__set_model_srv(model_name, pose)
+    
     def delete_object(self, model_name):
         """
         Deletes a model from the environment

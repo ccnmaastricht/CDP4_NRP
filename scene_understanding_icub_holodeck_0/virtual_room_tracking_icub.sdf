@@ -35,10 +35,10 @@
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
     <state world_name="default">
-      <sim_time>0 0</sim_time>
+      <sim_time>0 1000000</sim_time>
       <real_time>0 0</real_time>
-      <wall_time>1582729213 211615919</wall_time>
-      <iterations>0</iterations>
+      <wall_time>1582799591 551877770</wall_time>
+      <iterations>1</iterations>
       <model name="bench_0">
         <pose frame="">-4.36935 1.01034 -0.280649 0 -0 0</pose>
         <scale>1 1 1</scale>
@@ -758,6 +758,7 @@
       </link>
       <pose frame="">-5.46911 -2.30918 4.02082 0 -0 1.5708</pose>
       <pose frame="">-5.46911 -2.30918 4.02082 0 -0 1.5708</pose>
+      <pose frame="">-5.46911 -2.30918 4.02082 0 -0 1.5708</pose>
     </model>
     <model name="concretewall1_1">
       <static>1</static>
@@ -802,6 +803,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">-5.46911 -4.31171 4.02082 0 -0 1.5708</pose>
       <pose frame="">-5.46911 -4.31171 4.02082 0 -0 1.5708</pose>
       <pose frame="">-5.46911 -4.31171 4.02082 0 -0 1.5708</pose>
     </model>
@@ -850,6 +852,7 @@
       </link>
       <pose frame="">-4.343 -7.533 3.968 0 0 -3.14159</pose>
       <pose frame="">-4.343 -7.533 3.968 0 0 -3.14159</pose>
+      <pose frame="">-4.343 -7.533 3.968 0 0 -3.14159</pose>
     </model>
     <model name="concretewall1_3">
       <static>1</static>
@@ -894,6 +897,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">3.657 -7.533 3.968 0 0 -3.14159</pose>
       <pose frame="">3.657 -7.533 3.968 0 0 -3.14159</pose>
       <pose frame="">3.657 -7.533 3.968 0 0 -3.14159</pose>
     </model>
@@ -942,6 +946,7 @@
       </link>
       <pose frame="">5.657 -7.533 3.968 0 0 -3.14159</pose>
       <pose frame="">5.657 -7.533 3.968 0 0 -3.14159</pose>
+      <pose frame="">5.657 -7.533 3.968 0 0 -3.14159</pose>
     </model>
     <model name="concretewall1_5">
       <static>1</static>
@@ -986,6 +991,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">-4.343 4.378 3.968 0 0 -3.14159</pose>
       <pose frame="">-4.343 4.378 3.968 0 0 -3.14159</pose>
       <pose frame="">-4.343 4.378 3.968 0 0 -3.14159</pose>
     </model>
@@ -1034,6 +1040,7 @@
       </link>
       <pose frame="">6.748 3.697 2 0 -0 1.5708</pose>
       <pose frame="">6.748 3.697 2 0 -0 1.5708</pose>
+      <pose frame="">6.748 3.697 2 0 -0 1.5708</pose>
     </model>
     <model name="woodwall_11">
       <static>1</static>
@@ -1078,6 +1085,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">6.748 3.697 3.977 0 -0 1.5708</pose>
       <pose frame="">6.748 3.697 3.977 0 -0 1.5708</pose>
       <pose frame="">6.748 3.697 3.977 0 -0 1.5708</pose>
     </model>
@@ -1127,6 +1135,7 @@
       </link>
       <pose frame="">-4.36935 1.01034 -0.280649 0 -0 0</pose>
       <pose frame="">-4.36935 1.01034 -0.280649 0 -0 0</pose>
+      <pose frame="">-4.36935 1.01034 -0.280649 0 -0 0</pose>
     </model>
     <model name="squarewindow_10">
       <static>1</static>
@@ -1172,6 +1181,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">6.732 -2.29658 4.026 0 -0 1.5708</pose>
       <pose frame="">6.732 -2.29658 4.026 0 -0 1.5708</pose>
       <pose frame="">6.732 -2.29658 4.026 0 -0 1.5708</pose>
     </model>
@@ -1221,6 +1231,7 @@
       </link>
       <pose frame="">6.732 -4.29891 4.026 0 -0 1.5708</pose>
       <pose frame="">6.732 -4.29891 4.026 0 -0 1.5708</pose>
+      <pose frame="">6.732 -4.29891 4.026 0 -0 1.5708</pose>
     </model>
     <model name="squarewindow_12">
       <static>1</static>
@@ -1268,6 +1279,7 @@
       </link>
       <pose frame="">3.657 4.578 3.973 0 -0 3.14159</pose>
       <pose frame="">3.657 4.578 3.973 0 -0 3.14159</pose>
+      <pose frame="">3.657 4.578 3.973 0 -0 3.14159</pose>
     </model>
     <model name="ground">
       <static>1</static>
@@ -1308,6 +1320,7 @@
         <gravity>1</gravity>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">0 0 0 0 -0 0</pose>
       <pose frame="">0 0 0 0 -0 0</pose>
       <pose frame="">0 0 0 0 -0 0</pose>
     </model>
@@ -1357,6 +1370,7 @@
       </link>
       <pose frame="">6.65107 4.82045 0.019561 0 -0 0</pose>
       <pose frame="">6.65107 4.82045 0.019561 0 -0 0</pose>
+      <pose frame="">6.65107 4.82045 0.019561 0 -0 0</pose>
     </model>
     <model name="concretewall1_6">
       <static>1</static>
@@ -1401,6 +1415,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">5.657 4.378 3.968 0 0 -3.14159</pose>
       <pose frame="">5.657 4.378 3.968 0 0 -3.14159</pose>
       <pose frame="">5.657 4.378 3.968 0 0 -3.14159</pose>
     </model>
@@ -1450,6 +1465,7 @@
       </link>
       <pose frame="">6.732 -0.287 4.026 0 -0 1.5708</pose>
       <pose frame="">6.732 -0.287 4.026 0 -0 1.5708</pose>
+      <pose frame="">6.732 -0.287 4.026 0 -0 1.5708</pose>
     </model>
     <model name="squarewindow_9">
       <static>1</static>
@@ -1495,6 +1511,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">6.73181 1.697 4.02572 0 -0 1.5708</pose>
       <pose frame="">6.73181 1.697 4.02572 0 -0 1.5708</pose>
       <pose frame="">6.73181 1.697 4.02572 0 -0 1.5708</pose>
     </model>
@@ -1544,6 +1561,7 @@
       </link>
       <pose frame="">-0.343 4.39 3.973 0 -0 3.14159</pose>
       <pose frame="">-0.343 4.39 3.973 0 -0 3.14159</pose>
+      <pose frame="">-0.343 4.39 3.973 0 -0 3.14159</pose>
     </model>
     <model name="squarewindow_7">
       <static>1</static>
@@ -1589,6 +1607,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">1.657 4.39 3.973 0 -0 3.14159</pose>
       <pose frame="">1.657 4.39 3.973 0 -0 3.14159</pose>
       <pose frame="">1.657 4.39 3.973 0 -0 3.14159</pose>
     </model>
@@ -1638,6 +1657,7 @@
       </link>
       <pose frame="">-0.343 -7.52824 3.9729 0 -0 0</pose>
       <pose frame="">-0.343 -7.52824 3.9729 0 -0 0</pose>
+      <pose frame="">-0.343 -7.52824 3.9729 0 -0 0</pose>
     </model>
     <model name="squarewindow_5">
       <static>1</static>
@@ -1683,6 +1703,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">1.657 -7.52824 3.9729 0 -0 0</pose>
       <pose frame="">1.657 -7.52824 3.9729 0 -0 0</pose>
       <pose frame="">1.657 -7.52824 3.9729 0 -0 0</pose>
     </model>
@@ -1732,6 +1753,7 @@
       </link>
       <pose frame="">-2.343 4.39 3.973 0 -0 3.14159</pose>
       <pose frame="">-2.343 4.39 3.973 0 -0 3.14159</pose>
+      <pose frame="">-2.343 4.39 3.973 0 -0 3.14159</pose>
     </model>
     <model name="squarewindow_3">
       <static>1</static>
@@ -1777,6 +1799,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">-2.343 -7.52824 3.9729 0 -0 0</pose>
       <pose frame="">-2.343 -7.52824 3.9729 0 -0 0</pose>
       <pose frame="">-2.343 -7.52824 3.9729 0 -0 0</pose>
     </model>
@@ -1826,6 +1849,7 @@
       </link>
       <pose frame="">-5.4732 -0.287088 4.02572 0 0 -1.5708</pose>
       <pose frame="">-5.4732 -0.287088 4.02572 0 0 -1.5708</pose>
+      <pose frame="">-5.4732 -0.287088 4.02572 0 0 -1.5708</pose>
     </model>
     <model name="squarewindow_1">
       <static>1</static>
@@ -1873,6 +1897,7 @@
       </link>
       <pose frame="">-5.4732 1.71291 4.02572 0 0 -1.5708</pose>
       <pose frame="">-5.4732 1.71291 4.02572 0 0 -1.5708</pose>
+      <pose frame="">-5.4732 1.71291 4.02572 0 0 -1.5708</pose>
     </model>
     <model name="viz_poster_0">
       <static>1</static>
@@ -1892,6 +1917,7 @@
         <gravity>1</gravity>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">-5.27605 -0.322974 1.92915 0 -0 0</pose>
       <pose frame="">-5.27605 -0.322974 1.92915 0 -0 0</pose>
       <pose frame="">-5.27605 -0.322974 1.92915 0 -0 0</pose>
     </model>
@@ -1941,6 +1967,7 @@
       </link>
       <pose frame="">-5.35088 4.37792 0.019561 0 -0 0</pose>
       <pose frame="">-5.35088 4.37792 0.019561 0 -0 0</pose>
+      <pose frame="">-5.35088 4.37792 0.019561 0 -0 0</pose>
     </model>
     <model name="sofa_0">
       <static>1</static>
@@ -1986,6 +2013,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">-1.19702 -6.30912 -0.074259 0 -0 2.62634</pose>
       <pose frame="">-1.19702 -6.30912 -0.074259 0 -0 2.62634</pose>
       <pose frame="">-1.19702 -6.30912 -0.074259 0 -0 2.62634</pose>
     </model>
@@ -2035,6 +2063,7 @@
       </link>
       <pose frame="">0.529 1.203 5.077 0 -0 0</pose>
       <pose frame="">0.529 1.203 5.077 0 -0 0</pose>
+      <pose frame="">0.529 1.203 5.077 0 -0 0</pose>
     </model>
     <model name="top_lamp_0">
       <static>1</static>
@@ -2080,6 +2109,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">0.528672 -3.579 5.07716 0 -0 0</pose>
       <pose frame="">0.528672 -3.579 5.07716 0 -0 0</pose>
       <pose frame="">0.528672 -3.579 5.07716 0 -0 0</pose>
     </model>
@@ -2128,6 +2158,7 @@
       </link>
       <pose frame="">-2.48074 -4.60158 5.97425 0 -0 0</pose>
       <pose frame="">-2.48074 -4.60158 5.97425 0 -0 0</pose>
+      <pose frame="">-2.48074 -4.60158 5.97425 0 -0 0</pose>
     </model>
     <model name="bigtopwindow_1">
       <static>1</static>
@@ -2172,6 +2203,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">-2.48074 1.39842 5.97425 0 -0 0</pose>
       <pose frame="">-2.48074 1.39842 5.97425 0 -0 0</pose>
       <pose frame="">-2.48074 1.39842 5.97425 0 -0 0</pose>
     </model>
@@ -2220,6 +2252,7 @@
       </link>
       <pose frame="">3.51926 -4.60158 5.97425 0 -0 0</pose>
       <pose frame="">3.51926 -4.60158 5.97425 0 -0 0</pose>
+      <pose frame="">3.51926 -4.60158 5.97425 0 -0 0</pose>
     </model>
     <model name="bigtopwindow_3">
       <static>1</static>
@@ -2264,6 +2297,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">3.51926 1.39842 5.97425 0 -0 0</pose>
       <pose frame="">3.51926 1.39842 5.97425 0 -0 0</pose>
       <pose frame="">3.51926 1.39842 5.97425 0 -0 0</pose>
     </model>
@@ -2312,6 +2346,7 @@
       </link>
       <pose frame="">-4.343 4.378 0.01 0 -0 0</pose>
       <pose frame="">-4.343 4.378 0.01 0 -0 0</pose>
+      <pose frame="">-4.343 4.378 0.01 0 -0 0</pose>
     </model>
     <model name="viz_poster_2_0">
       <static>1</static>
@@ -2331,6 +2366,7 @@
         <gravity>1</gravity>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">-5.27605 1.68818 1.91121 0 -0 0</pose>
       <pose frame="">-5.27605 1.68818 1.91121 0 -0 0</pose>
       <pose frame="">-5.27605 1.68818 1.91121 0 -0 0</pose>
     </model>
@@ -2379,6 +2415,7 @@
       </link>
       <pose frame="">3.65669 -7.53299 0.00977 0 -0 0</pose>
       <pose frame="">3.65669 -7.53299 0.00977 0 -0 0</pose>
+      <pose frame="">3.65669 -7.53299 0.00977 0 -0 0</pose>
     </model>
     <model name="concretewallhigh_5">
       <static>1</static>
@@ -2423,6 +2460,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">5.65775 -7.53299 0.00977 0 -0 0</pose>
       <pose frame="">5.65775 -7.53299 0.00977 0 -0 0</pose>
       <pose frame="">5.65775 -7.53299 0.00977 0 -0 0</pose>
     </model>
@@ -2471,6 +2509,7 @@
       </link>
       <pose frame="">-4.34331 -7.53299 0.00977 0 -0 0</pose>
       <pose frame="">-4.34331 -7.53299 0.00977 0 -0 0</pose>
+      <pose frame="">-4.34331 -7.53299 0.00977 0 -0 0</pose>
     </model>
     <model name="concretewallhigh_0">
       <static>1</static>
@@ -2515,6 +2554,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">-5.47636 -0.316687 0.015928 0 -0 1.5708</pose>
       <pose frame="">-5.47636 -0.316687 0.015928 0 -0 1.5708</pose>
       <pose frame="">-5.47636 -0.316687 0.015928 0 -0 1.5708</pose>
     </model>
@@ -2563,6 +2603,7 @@
       </link>
       <pose frame="">-5.47636 1.68331 0.015928 0 -0 1.5708</pose>
       <pose frame="">-5.47636 1.68331 0.015928 0 -0 1.5708</pose>
+      <pose frame="">-5.47636 1.68331 0.015928 0 -0 1.5708</pose>
     </model>
     <model name="woodwall_5">
       <static>1</static>
@@ -2609,6 +2650,7 @@
       </link>
       <pose frame="">-5.476 3.691 3.977 0 -0 1.5708</pose>
       <pose frame="">-5.476 3.691 3.977 0 -0 1.5708</pose>
+      <pose frame="">-5.476 3.691 3.977 0 -0 1.5708</pose>
     </model>
     <model name="concretewallhigh_8">
       <static>1</static>
@@ -2653,6 +2695,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">5.657 4.378 0.01 0 -0 0</pose>
       <pose frame="">5.657 4.378 0.01 0 -0 0</pose>
       <pose frame="">5.657 4.378 0.01 0 -0 0</pose>
     </model>
@@ -2702,6 +2745,7 @@
       </link>
       <pose frame="">-0.34331 -7.4879 0.019561 0 -0 0</pose>
       <pose frame="">-0.34331 -7.4879 0.019561 0 -0 0</pose>
+      <pose frame="">-0.34331 -7.4879 0.019561 0 -0 0</pose>
     </model>
     <model name="highwindow_0">
       <static>1</static>
@@ -2747,6 +2791,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">-2.34331 -7.4879 0.019561 0 -0 0</pose>
       <pose frame="">-2.34331 -7.4879 0.019561 0 -0 0</pose>
       <pose frame="">-2.34331 -7.4879 0.019561 0 -0 0</pose>
     </model>
@@ -2796,6 +2841,7 @@
       </link>
       <pose frame="">-2.343 4.37817 0.02 0 -0 3.14159</pose>
       <pose frame="">-2.343 4.37817 0.02 0 -0 3.14159</pose>
+      <pose frame="">-2.343 4.37817 0.02 0 -0 3.14159</pose>
     </model>
     <model name="highwindow_2">
       <static>1</static>
@@ -2841,6 +2887,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">1.65669 -7.4879 0.019561 0 -0 0</pose>
       <pose frame="">1.65669 -7.4879 0.019561 0 -0 0</pose>
       <pose frame="">1.65669 -7.4879 0.019561 0 -0 0</pose>
     </model>
@@ -2890,6 +2937,7 @@
       </link>
       <pose frame="">1.657 4.378 0.02 0 -0 3.14159</pose>
       <pose frame="">1.657 4.378 0.02 0 -0 3.14159</pose>
+      <pose frame="">1.657 4.378 0.02 0 -0 3.14159</pose>
     </model>
     <model name="highwindow_4">
       <static>1</static>
@@ -2935,6 +2983,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">-0.343 4.378 0.02 0 -0 3.14159</pose>
       <pose frame="">-0.343 4.378 0.02 0 -0 3.14159</pose>
       <pose frame="">-0.343 4.378 0.02 0 -0 3.14159</pose>
     </model>
@@ -2984,6 +3033,7 @@
       </link>
       <pose frame="">6.74039 -2.29538 0.019561 0 -0 1.5708</pose>
       <pose frame="">6.74039 -2.29538 0.019561 0 -0 1.5708</pose>
+      <pose frame="">6.74039 -2.29538 0.019561 0 -0 1.5708</pose>
     </model>
     <model name="concretewallhigh_7">
       <static>1</static>
@@ -3028,6 +3078,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">3.657 4.378 0.01 0 -0 0</pose>
       <pose frame="">3.657 4.378 0.01 0 -0 0</pose>
       <pose frame="">3.657 4.378 0.01 0 -0 0</pose>
     </model>
@@ -3077,6 +3128,7 @@
       </link>
       <pose frame="">6.74 1.705 0.02 0 -0 1.5708</pose>
       <pose frame="">6.74 1.705 0.02 0 -0 1.5708</pose>
+      <pose frame="">6.74 1.705 0.02 0 -0 1.5708</pose>
     </model>
     <model name="highwindow_8">
       <static>1</static>
@@ -3122,6 +3174,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">6.74 -0.295 0.02 0 -0 1.5708</pose>
       <pose frame="">6.74 -0.295 0.02 0 -0 1.5708</pose>
       <pose frame="">6.74 -0.295 0.02 0 -0 1.5708</pose>
     </model>
@@ -3171,6 +3224,7 @@
       </link>
       <pose frame="">6.74039 -4.29539 0.019561 0 -0 1.5708</pose>
       <pose frame="">6.74039 -4.29539 0.019561 0 -0 1.5708</pose>
+      <pose frame="">6.74039 -4.29539 0.019561 0 -0 1.5708</pose>
     </model>
     <model name="carpetground_0">
       <static>1</static>
@@ -3210,6 +3264,7 @@
         <enable_wind>0</enable_wind>
         <kinematic>0</kinematic>
       </link>
+      <pose frame="">0 0 0.02 0 -0 0</pose>
       <pose frame="">0 0 0.02 0 -0 0</pose>
       <pose frame="">0 0 0.02 0 -0 0</pose>
     </model>
@@ -3256,6 +3311,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">-5.476 3.6915 2 0 -0 1.5708</pose>
       <pose frame="">-5.476 3.6915 2 0 -0 1.5708</pose>
       <pose frame="">-5.476 3.6915 2 0 -0 1.5708</pose>
     </model>
@@ -3305,6 +3361,7 @@
       </link>
       <pose frame="">-5.21683 -7.3505 0.019561 0 -0 0</pose>
       <pose frame="">-5.21683 -7.3505 0.019561 0 -0 0</pose>
+      <pose frame="">-5.21683 -7.3505 0.019561 0 -0 0</pose>
     </model>
     <model name="concretepylon_3">
       <static>1</static>
@@ -3350,6 +3407,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">6.65107 -7.53909 0.019561 0 -0 0</pose>
       <pose frame="">6.65107 -7.53909 0.019561 0 -0 0</pose>
       <pose frame="">6.65107 -7.53909 0.019561 0 -0 0</pose>
     </model>
@@ -3398,6 +3456,7 @@
       </link>
       <pose frame="">6.748 -6.317 2 0 -0 1.5708</pose>
       <pose frame="">6.748 -6.317 2 0 -0 1.5708</pose>
+      <pose frame="">6.748 -6.317 2 0 -0 1.5708</pose>
     </model>
     <model name="woodwall_0">
       <static>1</static>
@@ -3442,6 +3501,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">-5.47636 -6.31669 0 0 -0 1.5708</pose>
       <pose frame="">-5.47636 -6.31669 0 0 -0 1.5708</pose>
       <pose frame="">-5.47636 -6.31669 0 0 -0 1.5708</pose>
     </model>
@@ -3490,6 +3550,7 @@
       </link>
       <pose frame="">-5.476 -6.317 2 0 -0 1.5708</pose>
       <pose frame="">-5.476 -6.317 2 0 -0 1.5708</pose>
+      <pose frame="">-5.476 -6.317 2 0 -0 1.5708</pose>
     </model>
     <model name="woodwall_2">
       <static>1</static>
@@ -3534,6 +3595,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">-5.476 -6.317 3.97681 0 -0 1.5708</pose>
       <pose frame="">-5.476 -6.317 3.97681 0 -0 1.5708</pose>
       <pose frame="">-5.476 -6.317 3.97681 0 -0 1.5708</pose>
     </model>
@@ -3582,6 +3644,7 @@
       </link>
       <pose frame="">-5.47636 3.69107 0 0 -0 1.5708</pose>
       <pose frame="">-5.47636 3.69107 0 0 -0 1.5708</pose>
+      <pose frame="">-5.47636 3.69107 0 0 -0 1.5708</pose>
     </model>
     <model name="woodwall_6">
       <static>1</static>
@@ -3626,6 +3689,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">6.74826 -6.31669 0 0 -0 1.5708</pose>
       <pose frame="">6.74826 -6.31669 0 0 -0 1.5708</pose>
       <pose frame="">6.74826 -6.31669 0 0 -0 1.5708</pose>
     </model>
@@ -3675,6 +3739,7 @@
       </link>
       <pose frame="">-5.47636 -3.31669 0 0 -0 1.5708</pose>
       <pose frame="">-5.47636 -3.31669 0 0 -0 1.5708</pose>
+      <pose frame="">-5.47636 -3.31669 0 0 -0 1.5708</pose>
     </model>
     <model name="woodwall_8">
       <static>1</static>
@@ -3722,6 +3787,7 @@
       </link>
       <pose frame="">6.748 -6.317 3.977 0 -0 1.5708</pose>
       <pose frame="">6.748 -6.317 3.977 0 -0 1.5708</pose>
+      <pose frame="">6.748 -6.317 3.977 0 -0 1.5708</pose>
     </model>
     <model name="woodwall_9">
       <static>1</static>
@@ -3766,6 +3832,7 @@
         <pose frame="">0 0 0 0 -0 0</pose>
         <enable_wind>0</enable_wind>
       </link>
+      <pose frame="">6.74826 3.69705 0 0 -0 1.5708</pose>
       <pose frame="">6.74826 3.69705 0 0 -0 1.5708</pose>
       <pose frame="">6.74826 3.69705 0 0 -0 1.5708</pose>
     </model>

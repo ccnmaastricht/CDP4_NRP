@@ -9,7 +9,7 @@
   <ns1:configuration src="ExDSceneUnderstandingICub.uis" type="user-interaction-settings"/>
   <ns1:maturity>production</ns1:maturity>
   <ns1:environmentModel src="virtual_room_tracking_icub.sdf">
-    <ns1:robotPose pitch="0.0" robotId="icub" roll="0.0" x="-3.83985352516" y="0.36171323061" yaw="2.9096968174" z="0.617328822613"/>
+    <ns1:robotPose pitch="-0.00137903657742" robotId="icub" roll="0.000148881415953" x="-2.59457755089" y="0.669566214085" yaw="2.90969991684" z="0.6401039958"/>
   </ns1:environmentModel>
   <ns1:bibiConf src="bibi_configuration.bibi"/>
   <ns1:cameraPose>
