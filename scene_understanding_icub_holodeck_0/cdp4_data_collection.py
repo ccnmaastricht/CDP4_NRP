@@ -2,6 +2,7 @@ import os
 import rospy
 import numpy as np
 
+from std_msgs.msg import Float64
 from sensor_msgs.msg import Image
 from geometry_msgs.msg import Pose
 from gazebo_msgs.msg import ModelState, ModelStates
@@ -38,6 +39,8 @@ class CDP4DataCollection:
         # ROS Publishers
         self.__set_model_state_pub = rospy.Publisher("/gazebo/set_model_state", ModelState,
                                                      queue_size=1)
+
+        self.__eye_pos_pub = rospy.Publisher("/icub/eye_version/pos", Float64, queue_size=1)
 
         # ROS Services
         rospy.wait_for_service("gazebo/get_model_state", 10.0)
@@ -153,3 +156,10 @@ class CDP4DataCollection:
             rospy.sleep(0.1)
 
         return self.last_image[0][0]
+
+    def move_eyes(self, position):
+        """
+        Moves both iCub eyes to an absolute position by publishing the new position on the
+        /icub/eye_version/pos ROS topic
+        """
+        self.__eye_pos_pub.publish(position)
