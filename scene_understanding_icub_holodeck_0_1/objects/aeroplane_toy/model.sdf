@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+    <model name='aeroplane_toy'>
+        <pose>0 0 0 0 0 0</pose>
+        <static>0</static>
+        <link name='body'>
+            <inertial>
+                <mass>1.0950319037893554</mass>
+                <pose>0 0 0 0 0 0</pose>
+                <inertia>
+                    <ixx>0.00248643748759353</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.004026874067210542</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.0019966998864602826</izz>
+                </inertia>
+            </inertial>
+            <collision name="aeroplane_toy-coll">
+                <pose>0 0 0 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>model://aeroplane_toy/mesh/aeroplane_toy-coll.dae</uri>
+                    </mesh>
+                </geometry>
+            </collision>
+            <visual name='aeroplane_toy'>
+                <pose>0 0 0 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>model://aeroplane_toy/mesh/aeroplane_toy.dae</uri>
+                    </mesh>
+                </geometry>
+            </visual>
+            <velocity_decay>
+                <linear>0.01</linear>
+                <angular>0.01</angular>
+            </velocity_decay>
+            <self_collide>0</self_collide>
+            <kinematic>0</kinematic>
+            <gravity>0</gravity>
+        </link>
+    </model>
+</sdf>

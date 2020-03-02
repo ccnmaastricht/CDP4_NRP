@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+    <model name='cube_a'>
+        <pose>0 0 0 0 0 0</pose>
+        <static>0</static>
+        <link name='body'>
+            <inertial>
+                <mass>0.6000000193715093</mass>
+                <pose>0 0 0 0 0 0</pose>
+                <inertia>
+                    <ixx>0.0005800000300506753</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.0016250001567726378</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.0012050001247351407</izz>
+                </inertia>
+            </inertial>
+            <collision name="cube_a-coll">
+                <pose>0 0 0 0 0 0</pose>
+                <geometry>
+                    <box>
+                        <size>0.15 0.04 0.1</size>
+                    </box>
+                </geometry>
+                <max_contacts>10</max_contacts>
+                <surface>
+                    <contact>
+                        <ode/>
+                    </contact>
+                    <bounce/>
+                    <friction>
+                        <torsional>
+                            <ode/>
+                        </torsional>
+                        <ode/>
+                    </friction>
+                </surface>
+            </collision>
+            <visual name='cube_a'>
+                <pose>0 0 0 0 0 0</pose>
+                <geometry>
+                    <box>
+                        <size>0.15 0.04 0.1</size>
+                    </box>
+                </geometry>
+                <material>
+                    <script>
+                      <name>Gazebo/Red</name>
+                      <uri>file://media/materials/scripts/gazebo.material</uri>
+                    </script>
+                </material>
+            </visual>
+            <velocity_decay>
+                <linear>0.01</linear>
+                <angular>0.01</angular>
+            </velocity_decay>
+            <self_collide>0</self_collide>
+            <kinematic>0</kinematic>
+            <gravity>0</gravity>
+        </link>
+    </model>
+</sdf>
