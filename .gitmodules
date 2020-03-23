@@ -1,0 +1,3 @@
+[submodule "ganglion_cell_sampling"]
+	path = ganglion_cell_sampling
+	url = https://github.com/ccnmaastricht/ganglion_cell_sampling.git
