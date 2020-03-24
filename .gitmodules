@@ -1,3 +1,15 @@
 [submodule "ganglion_cell_sampling"]
 	path = ganglion_cell_sampling
 	url = https://github.com/ccnmaastricht/ganglion_cell_sampling.git
+[submodule "Object_recognition"]
+	path = Object_recognition
+	url = https://github.com/ccnmaastricht/Object_recognition.git
+[submodule "saliency"]
+	path = saliency
+	url = https://github.com/alexanderkroner/saliency.git
+[submodule "target_selection"]
+	path = target_selection
+	url = https://github.com/ccnmaastricht/target_selection
+[submodule "Senden-Schuecker-Hahne-Diesmann-Goebel-2018"]
+	path = Senden-Schuecker-Hahne-Diesmann-Goebel-2018
+	url = https://github.com/ReScience-Archives/Senden-Schuecker-Hahne-Diesmann-Goebel-2018.git
