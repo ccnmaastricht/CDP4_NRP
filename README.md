@@ -18,3 +18,26 @@ and embodied this in a virtual iCub robot simulated on the ![neurorobotics platf
 
 The architecture engages in a free viewing paradigm, making saccades based on the saliency of regions in the visual
 scene, identifying fixated objects and extracting their spatial relationship.
+
+
+
+\1. collect image from icub's left eyeventral:
+\2. resample image based on ganglion cell distribution
+\3. feed resampled image into object recognitiondorsal:
+\2. feed image into saliency encoder-decoder
+\3. stitch snapshot saliency into global saliency
+\4. feed global saliency into target selection
+\5. feed target into saccade generator6. adjust tilt and pan of icub's eyes
+
+```mermaid
+graph TD
+A(iCub camera) -->|pass image| B(saliency encoder-decoder)
+A -->|pass image| C(ganglion cell resampling)
+B -->|pass heat map| D(global saliency map)
+D -->|pass heat map| E(target selection)
+E -->|pass target| F(saccade generator)
+F -->|update coordinates| A
+C -->|pass image| G(object recognition)
+G -->|pass class| H(scene identification)
+A -->|pass coordinates| H
+```
