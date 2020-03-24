@@ -18,5 +18,5 @@ and embodied this in a virtual iCub robot simulated on the ![neurorobotics platf
 
 The architecture engages in a free viewing paradigm, making saccades based on the saliency of regions in the visual scene, identifying fixated objects and extracting their spatial relationship.
 
-![](/home/mario/Code/CDP4_NRP/.images/architecture_flowchart.png)
+![](https://github.com/ccnmaastricht/CDP4_NRP/tree/master/.images/architecture_flowchart.png)
 
