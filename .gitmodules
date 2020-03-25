@@ -10,6 +10,3 @@
 [submodule "target_selection"]
 	path = target_selection
 	url = https://github.com/ccnmaastricht/target_selection
-[submodule "Senden-Schuecker-Hahne-Diesmann-Goebel-2018"]
-	path = Senden-Schuecker-Hahne-Diesmann-Goebel-2018
-	url = https://github.com/ReScience-Archives/Senden-Schuecker-Hahne-Diesmann-Goebel-2018.git
