@@ -1712,10 +1712,10 @@
         <visualize>true</visualize>
         <topic>/icub_model/left_eye_camera/image_raw</topic>
         <camera name="left_eye">
-          <horizontal_fov>1.570796</horizontal_fov>
+          <horizontal_fov>2.6179938779914944</horizontal_fov>
           <image>
-            <width>320</width>
-            <height>240</height>
+            <width>4096</width>
+            <height>4096</height>
             <format>R8G8B8</format>
           </image>
           <clip>
