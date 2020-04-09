@@ -1,0 +1,5 @@
+<launch>
+<node name="manager_module" pkg="iba_manager" type="external_module_manager.py" respawn="false" output="screen"/>
+<node name="RCA" pkg="cdp4_scene_understanding" type="resampling.py" respawn="false" output="screen"/>
+<node name="ObjectRecognition" pkg="cdp4_scene_understanding" type="object_recognition.py" respawn="false" output="screen" />
+</launch>

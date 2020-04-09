@@ -1,0 +1,4 @@
+*.pyc
+*.orig
+.idea
+onnx-tensorflow
