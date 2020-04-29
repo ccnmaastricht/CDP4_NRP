@@ -10,6 +10,3 @@
 [submodule "target_selection"]
 	path = target_selection
 	url = https://github.com/ccnmaastricht/target_selection
-[submodule "spiking_saccade_generator"]
-	path = spiking_saccade_generator
-	url = git@github.com:INM-6/spiking_saccade_generator.git
