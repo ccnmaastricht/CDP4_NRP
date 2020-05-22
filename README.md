@@ -20,7 +20,7 @@ The architecture engages in a free viewing paradigm, making saccades based on th
 
 
 
-<img src="./images/architecture_flowchart.png" width="800"/>
+<img src="./.images/architecture_flowchart.png" width="800"/>
 
 
 
