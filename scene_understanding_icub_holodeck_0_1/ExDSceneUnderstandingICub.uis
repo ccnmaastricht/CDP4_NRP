@@ -44,167 +44,29 @@
       },
       "content": [
         {
-          "type": "row",
+          "type": "stack",
+          "width": 100,
           "isClosable": true,
           "reorderEnabled": true,
           "title": "",
-          "width": 72.72727272727273,
-          "height": 50,
+          "activeItemIndex": 0,
+          "height": 100,
           "content": [
             {
-              "type": "row",
-              "isClosable": true,
-              "reorderEnabled": true,
-              "title": "",
-              "width": 83.65164247517187,
-              "content": [
-                {
-                  "type": "stack",
-                  "width": 72.72727272727273,
-                  "isClosable": true,
-                  "reorderEnabled": true,
-                  "title": "",
-                  "activeItemIndex": 0,
-                  "height": 100,
-                  "content": [
-                    {
-                      "type": "component",
-                      "title": "Environment Rendering",
-                      "id": "environment-rendering",
-                      "componentName": "angularModuleComponent",
-                      "componentState": {
-                        "module": "environmentRenderingModule",
-                        "angularDirective": "<environment-rendering />",
-                        "singleton": true
-                      },
-                      "isClosable": false,
-                      "customOptionsDirective": "<environment-rendering-options/>",
-                      "pwidth": 800,
-                      "pheight": 600,
-                      "reorderEnabled": true
-                    }
-                  ]
-                },
-                {
-                  "type": "stack",
-                  "isClosable": true,
-                  "reorderEnabled": true,
-                  "title": "",
-                  "activeItemIndex": 0,
-                  "width": 27.272727272727273,
-                  "content": [
-                    {
-                      "type": "component",
-                      "title": "Object Inspector",
-                      "id": "object-inspector",
-                      "componentName": "angularModuleComponent",
-                      "componentState": {
-                        "module": "exdFrontendApp",
-                        "angularDirective": "<object-inspector />",
-                        "singleton": true
-                      },
-                      "pwidth": 300,
-                      "pheight": 800,
-                      "isClosable": true,
-                      "reorderEnabled": true
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "column",
-              "isClosable": true,
-              "reorderEnabled": true,
-              "title": "",
-              "height": 22.22222222222223,
-              "width": 16.348357524828113,
-              "content": [
-                {
-                  "type": "stack",
-                  "isClosable": true,
-                  "reorderEnabled": true,
-                  "title": "",
-                  "activeItemIndex": 0,
-                  "height": 18.181818181818183,
-                  "id": "__glMaximised",
-                  "content": [
-                    {
-                      "type": "component",
-                      "title": "Robot Camera Rendering",
-                      "id": "robot-camera-rendering",
-                      "componentName": "angularModuleComponent",
-                      "componentState": {
-                        "module": "environmentRenderingModule",
-                        "angularDirective": "<environment-rendering />"
-                      },
-                      "pwidth": 300,
-                      "pheight": 200,
-                      "isClosable": true,
-                      "reorderEnabled": true
-                    }
-                  ]
-                },
-                {
-                  "type": "column",
-                  "isClosable": true,
-                  "reorderEnabled": true,
-                  "title": "",
-                  "height": 81.81818181818183,
-                  "content": [
-                    {
-                      "type": "stack",
-                      "isClosable": true,
-                      "reorderEnabled": true,
-                      "title": "",
-                      "activeItemIndex": 0,
-                      "height": 22.22222222222222,
-                      "width": 100,
-                      "content": [
-                        {
-                          "type": "component",
-                          "title": "Robot Camera Rendering",
-                          "id": "robot-camera-rendering",
-                          "componentName": "angularModuleComponent",
-                          "componentState": {
-                            "module": "environmentRenderingModule",
-                            "angularDirective": "<environment-rendering />"
-                          },
-                          "pwidth": 300,
-                          "pheight": 200,
-                          "isClosable": true,
-                          "reorderEnabled": true
-                        }
-                      ]
-                    },
-                    {
-                      "type": "stack",
-                      "isClosable": true,
-                      "reorderEnabled": true,
-                      "title": "",
-                      "activeItemIndex": 0,
-                      "height": 77.77777777777777,
-                      "content": [
-                        {
-                          "type": "component",
-                          "title": "TF Editor",
-                          "id": "transfer-function-editor",
-                          "componentName": "angularModuleComponent",
-                          "componentState": {
-                            "module": "exdFrontendApp",
-                            "angularDirective": "<transfer-function-editor />",
-                            "singleton": true
-                          },
-                          "pwidth": 900,
-                          "pheight": 700,
-                          "isClosable": true,
-                          "reorderEnabled": true
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
+              "type": "component",
+              "title": "Environment Rendering",
+              "id": "environment-rendering",
+              "componentName": "angularModuleComponent",
+              "componentState": {
+                "module": "environmentRenderingModule",
+                "angularDirective": "<environment-rendering />",
+                "singleton": true
+              },
+              "isClosable": false,
+              "customOptionsDirective": "<environment-rendering-options/>",
+              "pwidth": 800,
+              "pheight": 600,
+              "reorderEnabled": true
             }
           ]
         }
