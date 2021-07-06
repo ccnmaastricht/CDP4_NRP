@@ -38,7 +38,7 @@ for i in range(100):
 sim.stop()
 
 file_name = '%s/labels.txt' % path
-with open(file_name, w) as f:
+with open(file_name, w+) as f:
     for item in dc.spawned_objects:
         f.write('%s\n' % item)
 

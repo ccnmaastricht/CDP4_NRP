@@ -1,6 +1,0 @@
-INFO 2021-06-17 23:13:56,252 - Process is started...
-INFO 2021-06-17 23:13:56,256 - Trying to spawn object /home/boran/Documents/NRP/Models/new_models/26bookshelf/ in x=-1.0, y=0.0, z=0.0...
-INFO 2021-06-17 23:13:56,519 - success: True
-status_message: "SpawnEntity: Successfully spawned entity"
-INFO 2021-06-17 23:13:56,531 - Succesfully spawned
-INFO 2021-06-17 23:13:57,533 - signal_shutdown [atexit]
