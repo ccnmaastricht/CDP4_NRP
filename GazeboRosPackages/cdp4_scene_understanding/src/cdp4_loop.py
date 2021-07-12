@@ -32,7 +32,8 @@ class CDP4Loop(object):
             self.__joint_states_callback)
 
         # ROS Publishers
-        self.__eye_pos_pub = rospy.Publisher("/icub/eye_version/pos", Float64, queue_size=1)
+        self.__horizontal_eye_pos_pub = rospy.Publisher("/icub/eye_version/pos", Float64, queue_size=1)
+        self.__vertical_eye_pos_pub = rospy.Publisher("/icub/eye_tilt/pos", Float64, queue_size=1)
 
         self.saliency_model = tf.saved_model.load(os.path.join(os.environ['HBP'],
             'GazeboRosPackages/src/cdp4_scene_understanding/salmodel/'))
@@ -74,16 +75,19 @@ class CDP4Loop(object):
                                                                     self.last_joint_states[0][1][1]):
             rospy.sleep(0.1)
 
-        eye_joint_name = 'eye_version'
-        index = self.last_joint_states[0][0].name.index(eye_joint_name)
-        return self.last_joint_states[0][0].position[index]
+        horizontal_eye_joint_name = 'eye_version'
+        vertical_eye_joint_name = 'eye_tilt'
+        horizontal_index = self.last_joint_states[0][0].name.index(horizontal_eye_joint_name)
+        vertical_index = self.last_joint_states[0][0].name.index(vertical_eye_joint_name)
+        return self.last_joint_states[0][0].position[horizontal_index], self.last_joint_states[0][0].position[vertical_index]
 
-    def move_eyes(self, position):
+    def move_eyes(self, horizontal_position, vertical_position):
         """
         Moves both iCub eyes to an absolute position by publishing the new position on the
-        /icub/eye_version/pos ROS topic
+        /icub/eye_version/pos and /icub/eye_tilt/pos ROS topics
         """
-        self.__eye_pos_pub.publish(position)
+        self.__horizontal_eye_pos_pub.publish(horizontal_position)
+        self.__vertical_eye_pos_pub.publish(vertical_position)
 
     def capture_image(self):
         """
@@ -120,9 +124,10 @@ class CDP4Loop(object):
 
             print target_selection_result
 
-            new_eye_position = np.random.rand()
-            self.move_eyes(new_eye_position)
-            print("Setting Eye Position to: {}".format(new_eye_position))
+            new_horizontal_eye_position = np.random.rand()
+            new_vertical_eye_position = np.random.rand()
+            self.move_eyes(new_horizontal_eye_position, new_vertical_eye_position)
+            print("Setting Eye Position to: {}, {}".format(new_horizontal_eye_position, new_vertical_eye_position))
 
             self.counter += 1
 
