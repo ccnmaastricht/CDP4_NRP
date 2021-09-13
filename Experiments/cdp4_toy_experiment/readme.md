@@ -14,9 +14,10 @@
 		$ docker exec -it nrp bash
 
 	b. (optional) Some installed packages inside the docker container can be updated (including a lot of ROS packages). These updates can bring stability and bug fixes, so it's recommended but not necessary to do them
+
+		$ curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+
 		$ sudo apt update
-	
-	​    $ curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 	
 	​	$ sudo apt upgrade
 	
