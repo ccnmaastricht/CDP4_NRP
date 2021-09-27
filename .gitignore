@@ -2,3 +2,4 @@
 *.orig
 .idea
 onnx-tensorflow
+Assets/
