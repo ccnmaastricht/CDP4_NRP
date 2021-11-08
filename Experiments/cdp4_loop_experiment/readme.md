@@ -25,4 +25,11 @@ Follow those steps in order to get the CDP4 Loop Experiment running:
 	d. Run the install.sh script. This will update apt packages, create a new virtualenv and install some pip packages
 		`$ ./install.sh`
 
-5. You can now launch and start the experiment from the Frontend. After starting, some logs will appear in the Frontend's console showing for example the output from the Target Selection module.
+5. Exit the docker container and copy the saliency model from the root of the repository files.
+	a. Exit the docker container
+		`$ CTRL + D`
+
+	b. Navigate to the root of the repository files and copy the "salmodel" directory to the experiment files inside the docker container
+		`$ docker cp salmodel/ nrp:/home/bbpnrsoa/.opt/nrpStorage/cdp4_loop_experiment_0/`
+
+6. You can now launch and start the experiment from the Frontend. After starting, some logs will appear in the Frontend's console showing for example the output from the Target Selection module.
