@@ -8,7 +8,6 @@ import numpy as np
 import yaml
 import shelve
 
-from cdp4_data_collection import CDP4DataCollection
 import geometry_msgs.msg as geom
 from model import Model
 from model import Adjuster
@@ -27,7 +26,7 @@ logging.basicConfig(filename='logs.log',
                     level=logging.INFO)
 logger = logging.getLogger('spawn-model')
 
-path_to_models = os.getenv("HBP") + "/Models/"
+path_to_models = os.getenv("HBP") + "/Models/FourRooms/"
 
 def wrap_logger(func):
     @wraps(func)
@@ -58,28 +57,21 @@ def random_path_yielder(path):
         current_subs_validated.remove(random_sub_name)
 
 def move_robot(pose):
-
     icub = Adjuster("icub")
-    
     time.sleep(1)
-
     icub.change_pose(x=pose[0], y=pose[1], z=pose[2], ox=pose[3], oy=pose[4], oz=pose[5])
 
 def move_object(obj_name, pose):
-
     obj = Adjuster(obj_name)
-    
     time.sleep(1)
-
     obj.change_pose(x=pose[0], y=pose[1], z=pose[2], ox=pose[3], oy=pose[4], oz=pose[5])
-
     room_objects = shelve.open("room_objects")
     temp = room_objects["furniture"]
     temp.append(obj_name)
     room_objects["furniture"] = temp
     room_objects.close()
 
-def _spawn_all_objects():
+def spawn_all_objects():
 
     print("Spawning all objects...")
 
@@ -99,13 +91,13 @@ def _spawn_all_objects():
             
             if is_single_object:
                 absolute_path = path_to_room + folder + '/'
-                _spawn_single_object(absolute_path, blank_position, blank_orientation, object_name=folder)
+                spawn_single_object(absolute_path, blank_position, blank_orientation, object_name=folder)
             else:
                 path_to_object = path_to_room + folder + '/'
                 object_list = os.listdir(path_to_object)
                 for obj in object_list:
                     absolute_path = path_to_object + obj + '/'
-                    _spawn_single_object(absolute_path, blank_position, blank_orientation, object_name=obj)
+                    spawn_single_object(absolute_path, blank_position, blank_orientation, object_name=obj)
                     
 
     print("All objects are spawned successfully.")
@@ -114,7 +106,7 @@ def _spawn_all_objects():
     room_objects["furniture"] = []
     room_objects.close()
 
-def _build_whole_room(room_name, layout_no, layout_file="layout.yaml"):
+def build_whole_room(room_name, layout_no, layout_file="layout.yaml"):
 
     room_objects = shelve.open("room_objects")
     room_objects["furniture"] = []
@@ -130,7 +122,7 @@ def _build_whole_room(room_name, layout_no, layout_file="layout.yaml"):
         folder = entity["folder"]
         if(folder == "icub"):
             positions = entity["positions"]
-            position = random.choice(positions.values())
+            position = random.choice(list(positions.values()))
             move_robot((position["x"], position["y"], position["z"], position["ox"], position["oy"], position["oz"]))
             continue
         positions = entity["position"]
@@ -143,11 +135,11 @@ def _build_whole_room(room_name, layout_no, layout_file="layout.yaml"):
         position = (positions['x'], positions['y'], positions['z'])
         orientation = (positions['ox'], positions['oy'], positions['oz'])
         pose = (positions["x"], positions["y"], positions["z"], positions["ox"], positions["oy"], positions["oz"])
-        _spawn_single_object(absolute_path, position, orientation, object_name=folder, )
+        spawn_single_object(absolute_path, position, orientation, object_name=folder, )
         move_object(folder, pose)
 
 
-def _spawn_whole_room(room_name, layout_no, layout_file="layout.yaml"):
+def spawn_whole_room(room_name, layout_no, layout_file="layout.yaml"):
     path_to_room = path_to_models + room_name + '/'
     with open(path_to_room + layout_file) as f:
         yaml_file = yaml.load(f)
@@ -175,9 +167,9 @@ def _spawn_whole_room(room_name, layout_no, layout_file="layout.yaml"):
         position = (positions['x'], positions['y'], positions['z'])
         orientation = (positions['ox'], positions['oy'], positions['oz']) \
                         if len({'ox','oy','oz'} & set(positions.keys()))==3 else None
-        _spawn_single_object(absolute_path, position, orientation, object_name=folder, )
+        spawn_single_object(absolute_path, position, orientation, object_name=folder, )
 
-def _debuild_whole_room():
+def debuild_whole_room():
     room_objects = shelve.open("room_objects")
     furnitures = room_objects["furniture"]
 
@@ -188,7 +180,7 @@ def _debuild_whole_room():
     room_objects.close()
 
 
-def _delete_whole_room():
+def delete_whole_room():
     room_objects = shelve.open("room_objects")
     furnitures = room_objects["furniture"]
 
@@ -199,7 +191,7 @@ def _delete_whole_room():
     room_objects["furniture"] = []
     room_objects.close()
 
-def _spawn_single_object(object_dir, position, orientation, object_name=None):
+def spawn_single_object(object_dir, position, orientation, object_name=None):
     obj_name = object_name if object_name else object_dir
     logger.info(
         "Trying to spawn object {} in x={}, y={}, z={}...".format(
@@ -217,7 +209,7 @@ def _spawn_single_object(object_dir, position, orientation, object_name=None):
     print(obj_name)
 
     logger.info("Succesfully spawned")
-    time.sleep(1)
+    #time.sleep(1)
 
 @wrap_logger
 def spawn(object_dir, position_str, room_name="", layout_no=0):
@@ -230,13 +222,13 @@ def spawn(object_dir, position_str, room_name="", layout_no=0):
             name of the room folder. kitchen, bed_room etc. Defaults to "".
     """
     if room_name:
-        _build_whole_room(room_name, layout_no)
+        build_whole_room(room_name, layout_no)
     elif object_dir:
         position = [float(v) for v in position_str.split(',')]
         object_dir = path_to_models + object_dir + '/'
-        _spawn_single_object(object_dir, position, None)
+        spawn_single_object(object_dir, position, None)
     else:
-        _spawn_all_objects()
+        spawn_all_objects()
         
 
 def set_parser():

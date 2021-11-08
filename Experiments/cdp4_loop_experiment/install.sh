@@ -28,7 +28,11 @@ virtualenv cdp4_venv
 source cdp4_venv/bin/activate
 pip install tensorflow
 pip install protobuf==3.9.2
+pip install texttable
+pip install future
+pip install roslibpy
 deactivate
 
 # Copy Target Selection module to the virtual environment to be able to import it
 cp /home/bbpnrsoa/.opt/nrpStorage/cdp4_loop_experiment_0/model_TS.py /home/bbpnrsoa/cdp4_venv/lib/python3.8/site-packages/
+

@@ -14,6 +14,7 @@ from tf.transformations import quaternion_from_euler, euler_from_quaternion
 class CDP4DataCollection:
 
     def __init__(self):
+        # initialize ros node only if using outside a transfer function or w/o virtual coach
         rospy.init_node('cdp4_data_collection')
         rospy.wait_for_service("/gazebo/get_world_properties")
 
@@ -21,7 +22,7 @@ class CDP4DataCollection:
                                                   GetWorldProperties)
 
         while self.__physics_state().sim_time < 2:
-            print "Waiting for simulation to be started"
+            print("Waiting for simulation to be started")
             rospy.sleep(2)
 
         self.bridge = CvBridge()
@@ -76,8 +77,8 @@ class CDP4DataCollection:
         try:
             timestamp = (msg.header.stamp.secs, msg.header.stamp.nsecs)
             cv2_img = self.bridge.imgmsg_to_cv2(msg, 'rgb8')
-        except CvBridgeError, e:
-            print e
+        except (CvBridgeError, e):
+            print(e)
         else:
             self.last_image[0] = (cv2_img, timestamp)
 
@@ -112,7 +113,7 @@ class CDP4DataCollection:
         """
         return self.__get_pose_srv(object_name, reference_frame).pose
 
-    def set_object_pose(self, object_name, pose, store):
+    def set_object_pose(self, object_name, pose, store=False):
         """
 
         :param object_name: the name of the object model

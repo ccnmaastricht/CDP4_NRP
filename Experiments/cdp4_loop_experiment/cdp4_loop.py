@@ -14,10 +14,11 @@ from sensor_msgs.msg import Image, JointState
 @nrp.MapVariable("ts", initial_value=None)
 @nrp.MapVariable("np", initial_value=None)
 @nrp.MapVariable("tf", initial_value=None)
+@nrp.MapVariable("spawner", initial_value=None)
 @nrp.MapVariable("T_SIM", initial_value=5)
 @nrp.Robot2Neuron()
 def cdp4_loop(t, image, joints, horizontal_eye_pos, vertical_eye_pos, right_shoulder_pitch,
-              left_shoulder_pitch, initialization, bridge, saliency_model, ts, np, tf, T_SIM):
+              left_shoulder_pitch, initialization, bridge, saliency_model, ts, np, tf, spawner, T_SIM):
 
     # initialize variables to persist
     if initialization.value is None:

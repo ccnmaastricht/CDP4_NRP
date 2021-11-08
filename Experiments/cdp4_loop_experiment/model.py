@@ -1,13 +1,15 @@
 import os
-import rospy
 import yaml
-import numpy as np
-from collections import defaultdict
-from geometry_msgs.msg import Pose
-from tf.transformations import quaternion_from_euler, euler_from_quaternion
-from gazebo_msgs.msg import ModelState, ModelStates
+import rospy
 
+import numpy as np
+
+from geometry_msgs.msg import Pose
+from collections import defaultdict
 from cdp4_data_collection import CDP4DataCollection
+from gazebo_msgs.msg import ModelState, ModelStates
+from tf.transformations import quaternion_from_euler, euler_from_quaternion
+
 
 def a_to_r(angle):
     """angle to radian
@@ -32,22 +34,20 @@ def _convert_to_pose(x=0.0, y=0.0, z=0.0,
     return pose
 
 
-class Model(CDP4DataCollection):
+class Model():
 
     root_path =  os.getenv("HBP") + "/Models/"
 
-    def __init__(self,
-                model_path,
-                position=(0,0,0),
-                orientation=None):
+    def __init__(self, model_path, position=(0,0,0), orientation=None):
         """
         Args:
             model_path (str): path to model folder. <root_path>/CookingBench/
         """
-        super(Model, self).__init__()
+        #super(Model, self).__init__()
         self.model_path = model_path
         self.model_name = model_path.split('/')[-2]
         self.position = position
+        self.cdp4_data_collection = CDP4DataCollection()
         self.orientation = self._read_configuration(model_path) \
                             if orientation is None else orientation
         x, y, z = position
@@ -78,17 +78,17 @@ class Model(CDP4DataCollection):
         with open(self.model_path + "model.sdf", "r") as model:
             sdf = model.read()
 
-        model_name = self.model_name
-        while model_name in self.last_model_states.name:
-            parts = model_name.split('_')
-            try:
-                parts[-1] = str(int(parts[-1]) + 1)
-            except:
-                parts.append('1')
-            model_name = "_".join(parts)
+        #model_name = self.model_name
+        #while model_name in self.last_model_states.name:
+        #    parts = model_name.split('_')
+        #    try:
+        #        parts[-1] = str(int(parts[-1]) + 1)
+        #    except:
+        #        parts.append('1')
+        #    model_name = "_".join(parts)
 
-        res = self._spawn_model_srv(model_name, sdf, "", self.pose, reference_frame)
-        rospy.loginfo(res)
+        #res = self._spawn_model_srv(model_name, sdf, "", self.pose, reference_frame)
+        self.cdp4_data_collection.add_object(self.model_name, self.pose, reference_frame)
 
     def delete_object(self, model_name):
         """
@@ -102,16 +102,17 @@ class Model(CDP4DataCollection):
             rospy.logerr("In delete model: %s" % model_name)
 
 
-class Adjuster(CDP4DataCollection):
+class Adjuster():
 
     def __init__(self, model_name):
-        super(Adjuster, self).__init__()
-        rospy.init_node('cdp4_data_collection')
+        #super(Adjuster, self).__init__()
+        #rospy.init_node('cdp4_data_collection')
         self.model_name = model_name
+        self.cdp4_data_collection = CDP4DataCollection()
 
     def _change_pose(self, x=None, y=None, z=None,
                     ox=None, oy=None, oz=None):
-        object_pose = self.get_object_pose()
+        object_pose = self.cdp4_data_collection.get_object_pose(self.model_name)
         x_new = x if x is not None else object_pose.position.x
         y_new = y if y is not None else object_pose.position.y
         z_new = z if z is not None else object_pose.position.z
@@ -122,7 +123,7 @@ class Adjuster(CDP4DataCollection):
 
     def change_pose(self, **kwargs):
         pose = self._change_pose(**kwargs)
-        self._set_object_pose(pose)
+        self.cdp4_data_collection.set_object_pose(self.model_name, pose)
 
     def _set_object_pose(self, pose):
         msg = ModelState()
