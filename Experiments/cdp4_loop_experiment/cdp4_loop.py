@@ -51,7 +51,7 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos, vertical_eye_pos, right_shou
         bridge.value = CvBridge()
 
         saliency_model.value = tf.value.saved_model.load(os.path.join(os.environ['HOME'],
-                               '.opt/nrpStorage/cdp4_loop_experiment_0/salmodel/'))
+                               '.opt/nrpStorage/cdp4_loop_experiment_0/assets/salmodel/'))
         saliency_model.value = saliency_model.value.signatures['serving_default']
 
         ts.value = TS(PARAMS)
