@@ -32,7 +32,3 @@ pip install texttable
 pip install future
 pip install roslibpy
 deactivate
-
-# Copy Target Selection module to the virtual environment to be able to import it
-cp /home/bbpnrsoa/.opt/nrpStorage/cdp4_loop_experiment_0/model_TS.py /home/bbpnrsoa/cdp4_venv/lib/python3.8/site-packages/
-

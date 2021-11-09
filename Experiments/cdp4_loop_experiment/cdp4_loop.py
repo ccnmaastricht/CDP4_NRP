@@ -4,8 +4,8 @@ from sensor_msgs.msg import Image, JointState
 
 @nrp.MapRobotSubscriber("image", Topic("/icub/icub_model/left_eye_camera/image_raw", Image))
 @nrp.MapRobotSubscriber("joints", Topic("/icub/joints", JointState))
-@nrp.MapRobotPublisher("horizontal_eye_pos", Topic("/icub/eye_version/pos", Float64))
-@nrp.MapRobotPublisher("vertical_eye_pos", Topic("/icub/eye_tilt/pos", Float64))
+@nrp.MapRobotPublisher("horizontal_eye_pos_pub", Topic("/icub/eye_version/pos", Float64))
+@nrp.MapRobotPublisher("vertical_eye_pos_pub", Topic("/icub/eye_tilt/pos", Float64))
 @nrp.MapRobotPublisher("right_shoulder_pitch", Topic("icub/r_shoulder_pitch/pos", Float64))
 @nrp.MapRobotPublisher("left_shoulder_pitch", Topic("icub/l_shoulder_pitch/pos", Float64))
 @nrp.MapVariable("initialization", initial_value=None)
@@ -14,11 +14,14 @@ from sensor_msgs.msg import Image, JointState
 @nrp.MapVariable("ts", initial_value=None)
 @nrp.MapVariable("np", initial_value=None)
 @nrp.MapVariable("tf", initial_value=None)
-@nrp.MapVariable("spawner", initial_value=None)
 @nrp.MapVariable("T_SIM", initial_value=5)
+@nrp.MapVariable("last_horizontal", initial_value=0)
+@nrp.MapVariable("last_vertical", initial_value=0)
+@nrp.MapVariable("sg", initial_value=None)
 @nrp.Robot2Neuron()
-def cdp4_loop(t, image, joints, horizontal_eye_pos, vertical_eye_pos, right_shoulder_pitch,
-              left_shoulder_pitch, initialization, bridge, saliency_model, ts, np, tf, spawner, T_SIM):
+def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, right_shoulder_pitch,
+              left_shoulder_pitch, initialization, bridge, saliency_model, ts, np, tf, T_SIM, last_horizontal,
+              last_vertical, sg):
 
     # initialize variables to persist
     if initialization.value is None:
@@ -39,6 +42,8 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos, vertical_eye_pos, right_shou
             tf.value = tensorflow
             
             from model_TS import TS
+            from spiking_saccade_generator.saccade_generator import construct_saccade_generator
+            from spiking_saccade_generator.helpers.i_o_scripts import stim_amp, saccadic_size_single_side
         except:
             clientLogger.info("Unable to import TensorFlow, did you change the path in the transfer function?")
             raise
@@ -51,10 +56,13 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos, vertical_eye_pos, right_shou
         bridge.value = CvBridge()
 
         saliency_model.value = tf.value.saved_model.load(os.path.join(os.environ['HOME'],
-                               '.opt/nrpStorage/cdp4_loop_experiment_0/salmodel/'))
+                               '.opt/nrpStorage/cdp4_loop_experiment_0/resources/salmodel/'))
         saliency_model.value = saliency_model.value.signatures['serving_default']
 
         ts.value = TS(PARAMS)
+
+        # initialize saccade generator
+        sg.value = construct_saccade_generator()
 
         clientLogger.info("Initialization ... Done!")
         initialization.value = True
