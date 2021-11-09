@@ -13,6 +13,18 @@
       </attenuation>
       <cast_shadows>1</cast_shadows>
     </light>
+    <light name="pointlight_0" type="point">
+      <pose frame="">-2 0 2.0 0 -0 0</pose>
+      <diffuse>1.0 1.0 1.0 1</diffuse>
+      <specular>0 0 0 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.000</quadratic>
+      </attenuation>
+      <direction>0 0 -1</direction>
+    </light>
     <gravity>0 0 -9.8</gravity>
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
     <atmosphere type="adiabatic"/>
