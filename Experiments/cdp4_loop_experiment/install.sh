@@ -32,3 +32,6 @@ pip install texttable
 pip install future
 pip install roslibpy
 deactivate
+
+# Comment out CLE Line to avoid importing Nest
+sed -i '44 s/^#*/#/' $HBP/CLE/hbp_nrp_cle/hbp_nrp_cle/brainsim/__init__.py

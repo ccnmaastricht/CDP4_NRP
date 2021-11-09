@@ -2,5 +2,6 @@
   xmlns:ns1="http://schemas.humanbrainproject.eu/SP10/2014/BIBI" 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ns1:bodyModel robotId="icub">model.sdf</ns1:bodyModel>
+  <ns1:mode>SynchronousNengoSimulation</ns1:mode>
   <ns1:transferFunction src="cdp4_loop.py" active="true" priority="0" xsi:type="ns1:PythonTransferFunction" />
 </ns1:bibi>
