@@ -15,13 +15,15 @@ from sensor_msgs.msg import Image, JointState
 @nrp.MapVariable("np", initial_value=None)
 @nrp.MapVariable("tf", initial_value=None)
 @nrp.MapVariable("T_SIM", initial_value=5)
-@nrp.MapVariable("last_horizontal", initial_value=0)
-@nrp.MapVariable("last_vertical", initial_value=0)
-@nrp.MapVariable("sg", initial_value=None)
+@nrp.MapVariable("ec", initial_value=None)
+@nrp.MapVariable("stim_time", initial_value=2000.)
+@nrp.MapVariable("stim_duration", initial_value=75.)
+@nrp.MapVariable("saccade_size_right_desired", initial_value=None)
+@nrp.MapVariable("saccade_size_up_desired", initial_value=None)
 @nrp.Robot2Neuron()
 def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, right_shoulder_pitch,
-              left_shoulder_pitch, initialization, bridge, saliency_model, ts, np, tf, T_SIM, last_horizontal,
-              last_vertical, sg):
+              left_shoulder_pitch, initialization, bridge, saliency_model, ts, np, tf, T_SIM, ec,
+              stim_time, stim_duration, saccade_size_right_desired, saccade_size_up_desired):
 
     # initialize variables to persist
     if initialization.value is None:
@@ -40,14 +42,13 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
 
             import tensorflow 
             tf.value = tensorflow
-            
+
             from model_TS import TS
-            from spiking_saccade_generator.saccade_generator import construct_saccade_generator
-            from spiking_saccade_generator.helpers.i_o_scripts import stim_amp, saccadic_size_single_side
+
+            import eye_control
         except:
             clientLogger.info("Unable to import TensorFlow, did you change the path in the transfer function?")
             raise
-
 
         n = 48
         N = n ** 2
@@ -60,9 +61,10 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
         saliency_model.value = saliency_model.value.signatures['serving_default']
 
         ts.value = TS(PARAMS)
+        ec.value = eye_control.EyeControl()
 
-        # initialize saccade generator
-        sg.value = construct_saccade_generator()
+        saccade_size_right_desired.value = np.value.ones(10)*0.07
+        saccade_size_up_desired.value = np.value.ones(10)*0.03
 
         clientLogger.info("Initialization ... Done!")
         initialization.value = True
@@ -74,8 +76,8 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
         vertical_eye_joint_name = 'eye_tilt'
         horizontal_index = joints.value.name.index(horizontal_eye_joint_name)
         vertical_index = joints.value.name.index(vertical_eye_joint_name)
-        clientLogger.info(t, joints.value.position[horizontal_index],
-                           joints.value.position[vertical_index])
+        #clientLogger.info(t, joints.value.position[horizontal_index],
+        #                   joints.value.position[vertical_index])
 
         # Convert ROS image to CV and resize
         import cv2
@@ -86,6 +88,14 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
         input_img = tf.value.convert_to_tensor(input_img, dtype='float')
         saliency_map = saliency_model.value(input_img)['out'].numpy().squeeze().flatten()
 
-        ts.value.I_ext = ts.value.read_saliency_NRP(saliency_map)
-        target_selection_result = np.value.mean(ts.value.simulate(T_SIM.value), axis=1)
-        clientLogger.info("Target Selection Results: {}".format(target_selection_result))
+        for _ in range(5):
+            ts.value.I_ext = ts.value.read_saliency_NRP(saliency_map)
+            target_selection_result = np.value.mean(ts.value.simulate(T_SIM.value), axis=1)
+            target_selection_argmax = np.value.argmax(target_selection_result)
+            target_selection_idx = np.value.unravel_index(target_selection_argmax, (48, 48))
+            clientLogger.info("Target Selection Results: {}".format(target_selection_idx))
+
+        horizontal, vertical = ec.value.move_eyes(stim_time.value, stim_duration.value, target_selection_idx[0], target_selection_idx[1])
+        clientLogger.info("Saccade Generator output: {}".format(horizontal, vertical))
+        horizontal_eye_pos_pub.send_message(horizontal)
+        vertical_eye_pos_pub.send_message(vertical)
