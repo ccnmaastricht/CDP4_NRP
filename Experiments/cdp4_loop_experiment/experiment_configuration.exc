@@ -17,4 +17,5 @@
     <ns1:cameraLookAt x="0.0" y="1.48" z="0.6"/>
   </ns1:cameraPose>
   <ns1:cloneDate>2020-02-25T10:47:48</ns1:cloneDate>
+  <ns1:rosLaunch src="saccade_generator.launch" />
 </ns1:ExD>

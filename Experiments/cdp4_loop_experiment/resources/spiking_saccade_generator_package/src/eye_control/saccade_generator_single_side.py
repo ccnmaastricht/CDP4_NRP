@@ -5,9 +5,9 @@ right)
 :license: CC BY-NC-SA 4.0, see LICENSE.md
 '''
 
-from spiking_saccade_generator.helpers.network_helper import create_population
-from spiking_saccade_generator.parameters.population_parameters import *
-from spiking_saccade_generator.parameters.single_neuron_parameters import *
+from eye_control.helpers.network_helper import create_population
+from eye_control.parameters.population_parameters import *
+from eye_control.parameters.single_neuron_parameters import *
 
 import nest
 import numpy as np

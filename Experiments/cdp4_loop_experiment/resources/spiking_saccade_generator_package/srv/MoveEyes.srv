@@ -1,0 +1,7 @@
+float64 stim_time
+float64 stim_duration
+float64 saccade_size_right
+float64 saccade_size_up
+---
+float64 horizontal
+float64 vertical

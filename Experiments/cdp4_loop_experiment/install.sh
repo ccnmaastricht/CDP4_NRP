@@ -35,3 +35,15 @@ deactivate
 
 # Comment out CLE Line to avoid importing Nest
 sed -i '44 s/^#*/#/' $HBP/CLE/hbp_nrp_cle/hbp_nrp_cle/brainsim/__init__.py
+
+# Change saliency model owner to be able to delete experiment if needed
+cd $HOME/.opt/nrpStorage/cdp4_loop_experiment_0
+sudo chown -R bbpnrsoa:bbp-ext resources/
+
+# Install spiking_saccade_generator ROS Package
+cp -r resources/spiking_saccade_generator_package $HBP/GazeboRosPackages/src/spiking_saccade_generator
+cd $HBP/GazeboRosPackages/
+catkin build
+
+# Restart the NRP
+sudo supervisorctl restart ros-simulation-factory_app

@@ -1,6 +1,9 @@
+import os
+import rospy
 from std_msgs.msg import Float64
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image, JointState
+from spiking_saccade_generator.srv import MoveEyes
 
 @nrp.MapRobotSubscriber("image", Topic("/icub/icub_model/left_eye_camera/image_raw", Image))
 @nrp.MapRobotSubscriber("joints", Topic("/icub/joints", JointState))
@@ -15,14 +18,12 @@ from sensor_msgs.msg import Image, JointState
 @nrp.MapVariable("np", initial_value=None)
 @nrp.MapVariable("tf", initial_value=None)
 @nrp.MapVariable("T_SIM", initial_value=5)
-@nrp.MapVariable("ec", initial_value=None)
-@nrp.MapVariable("stim_time", initial_value=2000.)
-@nrp.MapVariable("stim_duration", initial_value=75.)
 @nrp.MapVariable("Nrc", initial_value=48)
+@nrp.MapVariable("saccade_generator", initial_value=rospy.ServiceProxy('/move_eyes', MoveEyes))
 @nrp.Robot2Neuron()
 def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, right_shoulder_pitch,
-              left_shoulder_pitch, initialization, bridge, saliency_model, ts, np, tf, T_SIM, ec,
-              stim_time, stim_duration, Nrc):
+              left_shoulder_pitch, initialization, bridge, saliency_model, ts, np, tf, T_SIM, Nrc,
+              saccade_generator):
 
     # initialize variables to persist
     if initialization.value is None:
@@ -43,7 +44,7 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
             tf.value = tensorflow
 
             from model_TS import TS
-            import eye_control
+
         except:
             clientLogger.info("Unable to import TensorFlow, did you change the path in the transfer function?")
             raise
@@ -59,7 +60,6 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
         saliency_model.value = saliency_model.value.signatures['serving_default']
 
         ts.value = TS(PARAMS)
-        ec.value = eye_control.EyeControl()
 
         clientLogger.info("Initialization ... Done!")
         initialization.value = True
@@ -93,8 +93,9 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
         displacements = (target_selection_idx - current_eye_pos)/Nrc.value
         clientLogger.info("Displacements: {}".format(displacements))
 
-        horizontal, vertical = ec.value.move_eyes(stim_time.value, stim_duration.value, displacements[0], displacements[1])
-        clientLogger.info("Saccade Generator output: {}".format(horizontal, vertical))
-        #horizontal_eye_pos_pub.send_message(horizontal)
-        #vertical_eye_pos_pub.send_message(vertical)
-        #clientLogger.info("Eyes moved to: {}, {}".format(horizontal, vertical))
+        sg_output = saccade_generator.value(0., 1000., displacements[0], displacements[1])
+        clientLogger.info(sg_output)
+
+        horizontal_eye_pos_pub.send_message(sg_output.horizontal)
+        vertical_eye_pos_pub.send_message(sg_output.vertical)
+        clientLogger.info("Eyes moved to: {}, {}".format(sg_output.horizontal, sg_output.vertical))

@@ -5,8 +5,8 @@ import numpy as np
 
 from std_msgs.msg import Float64
 from gazebo_msgs.srv import GetModelState, GetWorldProperties, SpawnEntity, DeleteModel
-from spiking_saccade_generator.saccade_generator import construct_saccade_generator
-from spiking_saccade_generator.helpers.i_o_scripts import stim_amp, saccadic_size_single_side
+from eye_control.saccade_generator import construct_saccade_generator
+from eye_control.helpers.i_o_scripts import stim_amp, saccadic_size_single_side
 
 class EyeControl:
 
@@ -35,7 +35,8 @@ class EyeControl:
                                          'start' : stim_time,
                                          'stop' : stim_time + stim_duration})
 
-        nest.Simulate(stim_time + 400.)
+        nest.Simulate(5.)
+        #nest.Simulate(10)
 
         spike_times_left = nest.GetStatus(self.spike_detector_left, 'events')[0]['times']
         spike_times_right = nest.GetStatus(self.spike_detector_right, 'events')[0]['times']
@@ -62,7 +63,7 @@ class EyeControl:
         horizontal = self.last_horizontal + saccade_displacement_x
         vertical = self.last_vertical + saccade_displacement_y
 
-        return horizontal, vertical
+        return [horizontal, vertical]
 
 
     def __construct_SG(self):

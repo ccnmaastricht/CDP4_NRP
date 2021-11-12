@@ -3,7 +3,7 @@ Parameters of population of spiking saccade genrator
 
 :license: CC BY-NC-SA 4.0, see LICENSE.md
 '''
-from spiking_saccade_generator.parameters.single_neuron_parameters import *
+from eye_control.parameters.single_neuron_parameters import *
 from copy import deepcopy as deep
 
 weight = 0.6*1e1
