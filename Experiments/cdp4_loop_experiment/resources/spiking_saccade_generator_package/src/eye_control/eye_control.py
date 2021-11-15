@@ -109,13 +109,15 @@ class EyeControl:
         self.current_count[2] = len(spike_times_up)
         self.current_count[3] = len(spike_times_down)
 
+        print("Current Count: {}".format(self.current_count))
+
         for i in range(4):
-            self.rate[i] = (self.current_count[i] - previous_count[i]) / 80.
+            self.rate[i] = (self.current_count[i] - previous_count[i])/80.
             previous_count[i] = int(self.current_count[i])
         previous_count = tuple(previous_count)
 
-        last_horizontal  += (self.dist(self.stim(self.rate[1])) - self.dist(self.stim(self.rate[0])) )
-        last_vertical    += (self.dist(self.stim(self.rate[2])) - self.dist(self.stim(self.rate[3])) )
+        last_horizontal  += (self.dist(self.stim(self.rate[1])) - self.dist(self.stim(self.rate[0])))
+        last_vertical    += (self.dist(self.stim(self.rate[2])) - self.dist(self.stim(self.rate[3])))
         print('Pos_h,pos_v: ', last_horizontal, last_vertical)
 
         #self.last_horizontal = self.last_horizontal + saccade_displacement_x
