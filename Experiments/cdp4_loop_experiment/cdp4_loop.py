@@ -11,6 +11,7 @@ from spiking_saccade_generator.srv import MoveEyes
 @nrp.MapRobotPublisher("vertical_eye_pos_pub", Topic("/icub/eye_tilt/pos", Float64))
 @nrp.MapRobotPublisher("right_shoulder_pitch", Topic("icub/r_shoulder_pitch/pos", Float64))
 @nrp.MapRobotPublisher("left_shoulder_pitch", Topic("icub/l_shoulder_pitch/pos", Float64))
+@nrp.MapRobotPublisher("plotter", Topic("/cdp4/visualizer", Image))
 @nrp.MapVariable("initialization", initial_value=None)
 @nrp.MapVariable("bridge", initial_value=None)
 @nrp.MapVariable("saliency_model", initial_value=None)
@@ -23,10 +24,12 @@ from spiking_saccade_generator.srv import MoveEyes
 @nrp.MapVariable("last_vertical", initial_value=0)
 @nrp.MapVariable("previous_count", initial_value=[0, 0, 0, 0])
 @nrp.MapVariable("saccade_generator", initial_value=rospy.ServiceProxy('/move_eyes', MoveEyes))
+@nrp.MapVariable("fig", initial_value=None)
+@nrp.MapVariable("plt", initial_value=None)
 @nrp.Robot2Neuron()
 def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, right_shoulder_pitch,
-              left_shoulder_pitch, initialization, bridge, saliency_model, ts, np, tf, T_SIM, Nrc,
-              last_horizontal, last_vertical, previous_count, saccade_generator):
+              left_shoulder_pitch, plotter, initialization, bridge, saliency_model, ts, np, tf, T_SIM,
+              Nrc, last_horizontal, last_vertical, previous_count, saccade_generator, fig, plt):
 
     # initialize variables to persist
     if initialization.value is None:
@@ -45,6 +48,11 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
 
             import tensorflow 
             tf.value = tensorflow
+
+            import matplotlib.pyplot
+            plt.value = matplotlib.pyplot
+            plt.value.switch_backend('Agg')
+            fig.value, _ = plt.value.subplots(1, figsize=(6, 6))
 
             from model_TS import TS
 
@@ -70,6 +78,8 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
 
     if joints.value is not None and image.value is not None:
 
+        import cv2
+
         horizontal_eye_joint_name = 'eye_version'
         vertical_eye_joint_name = 'eye_tilt'
         horizontal_index = joints.value.name.index(horizontal_eye_joint_name)
@@ -80,13 +90,26 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
         #clientLogger.info(t, current_eye_pos, timestamp)
 
         # Convert ROS image to CV and resize
-        import cv2
         cv2_img = bridge.value.imgmsg_to_cv2(image.value, 'rgb8')
         cv2_img = cv2.resize(cv2_img, (320, 320))
 
         input_img = np.value.expand_dims(cv2_img, 0)
         input_img = tf.value.convert_to_tensor(input_img, dtype='float')
-        saliency_map = saliency_model.value(input_img)['out'].numpy().squeeze().flatten()
+        saliency_map = saliency_model.value(input_img)['out'].numpy().squeeze()
+
+        # plot saliency map
+        plt.value.imshow(saliency_map, cmap="gray")
+        fig.value.canvas.draw()
+        plt.value.tight_layout()
+
+        # convert and publish the image on a ROS topic
+        img_data = np.value.fromstring(fig.value.canvas.tostring_rgb(), dtype=np.value.uint8)
+        img_data = img_data.reshape(fig.value.canvas.get_width_height()[::-1] + (3,))
+        ros_img = bridge.value.cv2_to_imgmsg(img_data, 'rgb8')
+        plotter.send_message(ros_img)
+
+        saliency_map = saliency_map.flatten()
+
 
         ts.value.I_ext = ts.value.read_saliency_NRP(saliency_map)
         target_selection_result = np.value.mean(ts.value.simulate(T_SIM.value), axis=1)
