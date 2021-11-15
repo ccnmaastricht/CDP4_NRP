@@ -19,11 +19,14 @@ from spiking_saccade_generator.srv import MoveEyes
 @nrp.MapVariable("tf", initial_value=None)
 @nrp.MapVariable("T_SIM", initial_value=5)
 @nrp.MapVariable("Nrc", initial_value=48)
+@nrp.MapVariable("last_horizontal", initial_value=0)
+@nrp.MapVariable("last_vertical", initial_value=0)
+@nrp.MapVariable("previous_count", initial_value=[0, 0, 0, 0])
 @nrp.MapVariable("saccade_generator", initial_value=rospy.ServiceProxy('/move_eyes', MoveEyes))
 @nrp.Robot2Neuron()
 def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, right_shoulder_pitch,
               left_shoulder_pitch, initialization, bridge, saliency_model, ts, np, tf, T_SIM, Nrc,
-              saccade_generator):
+              last_horizontal, last_vertical, previous_count, saccade_generator):
 
     # initialize variables to persist
     if initialization.value is None:
@@ -90,12 +93,22 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
         target_selection_argmax = np.value.argmax(target_selection_result)
         target_selection_idx = np.value.unravel_index(target_selection_argmax, (48, 48))
         #clientLogger.info("Target Selection Results: {}".format(target_selection_idx))
+
+        from utils import ind2rad
+        displacement_vert = ind2rad(target_selection_idx[0])
+        displacement_hori = ind2rad(target_selection_idx[1])
         displacements = (target_selection_idx - current_eye_pos)/Nrc.value
         clientLogger.info("Displacements: {}".format(displacements))
 
-        sg_output = saccade_generator.value(0., 1000., displacements[0], displacements[1])
+        sg_output = saccade_generator.value(0., 1000., displacement_hori, displacement_vert,
+                                            last_horizontal.value, last_vertical.value,
+                                            previous_count.value)
         clientLogger.info(sg_output)
 
         horizontal_eye_pos_pub.send_message(sg_output.horizontal)
         vertical_eye_pos_pub.send_message(sg_output.vertical)
         clientLogger.info("Eyes moved to: {}, {}".format(sg_output.horizontal, sg_output.vertical))
+
+        last_horizontal.value = sg_output.horizontal
+        last_vertical.value = sg_output.vertical
+        previous_count.value = sg_output.previous_count_new
