@@ -26,10 +26,12 @@ from spiking_saccade_generator.srv import MoveEyes
 @nrp.MapVariable("saccade_generator", initial_value=rospy.ServiceProxy('/move_eyes', MoveEyes))
 @nrp.MapVariable("fig", initial_value=None)
 @nrp.MapVariable("plt", initial_value=None)
+@nrp.MapVariable("label", initial_value='%s')
+#@nrp.MapVariable("labels", initial_value='%s')
 @nrp.Robot2Neuron()
 def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, right_shoulder_pitch,
               left_shoulder_pitch, plotter, initialization, bridge, saliency_model, ts, np, tf, T_SIM,
-              Nrc, last_horizontal, last_vertical, previous_count, saccade_generator, fig, plt):
+              Nrc, last_horizontal, last_vertical, previous_count, saccade_generator, fig, plt, label):
 
     # initialize variables to persist
     if initialization.value is None:
@@ -110,7 +112,6 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
 
         saliency_map = saliency_map.flatten()
 
-
         ts.value.I_ext = ts.value.read_saliency_NRP(saliency_map)
         target_selection_result = np.value.mean(ts.value.simulate(T_SIM.value), axis=1)
         target_selection_argmax = np.value.argmax(target_selection_result)
@@ -118,19 +119,21 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
         #clientLogger.info("Target Selection Results: {}".format(target_selection_idx))
 
         from utils import ind2rad
-        displacement_vert = ind2rad(target_selection_idx[0])
-        displacement_hori = ind2rad(target_selection_idx[1])
-        displacements = (target_selection_idx - current_eye_pos)/Nrc.value
-        clientLogger.info("Displacements: {}".format(displacements))
+        target_h = ind2rad(target_selection_idx[1])
+        target_v = ind2rad(target_selection_idx[0])
+        displacement_inp_h = target_h
+        displacement_inp_v = target_v
+        clientLogger.info("Displacements: {}, {}".format(displacement_inp_h, displacement_inp_v))
 
-        sg_output = saccade_generator.value(0., 1000., displacement_hori, displacement_vert,
+        sg_output = saccade_generator.value(0., 1000., displacement_inp_h, displacement_inp_v,
                                             last_horizontal.value, last_vertical.value,
                                             previous_count.value)
+
         clientLogger.info(sg_output)
 
-        horizontal_eye_pos_pub.send_message(sg_output.horizontal)
-        vertical_eye_pos_pub.send_message(sg_output.vertical)
-        clientLogger.info("Eyes moved to: {}, {}".format(sg_output.horizontal, sg_output.vertical))
+        horizontal_eye_pos_pub.send_message(sg_output.horizontal + current_eye_pos[0])
+        vertical_eye_pos_pub.send_message(sg_output.vertical + current_eye_pos[1])
+        clientLogger.info("Eye Positions: {}, {}".format(current_eye_pos[0], current_eye_pos[1]))
 
         last_horizontal.value = sg_output.horizontal
         last_vertical.value = sg_output.vertical

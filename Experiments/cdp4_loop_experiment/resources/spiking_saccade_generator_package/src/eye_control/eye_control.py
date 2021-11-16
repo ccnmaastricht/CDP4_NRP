@@ -118,6 +118,9 @@ class EyeControl:
 
         last_horizontal  += (self.dist(self.stim(self.rate[1])) - self.dist(self.stim(self.rate[0])))
         last_vertical    += (self.dist(self.stim(self.rate[2])) - self.dist(self.stim(self.rate[3])))
+        fov = 1.13
+        last_horizontal = last_horizontal*0.5*fov
+        last_vertical = last_vertical*0.5*fov
         print('Pos_h,pos_v: ', last_horizontal, last_vertical)
 
         #self.last_horizontal = self.last_horizontal + saccade_displacement_x
