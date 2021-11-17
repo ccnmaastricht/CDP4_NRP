@@ -1428,7 +1428,7 @@
         </geometry>
       </visual>
     </link>
-    <joint name='neck_pitch' type='revolute'>
+    <joint name='neck_pitch' type='fixed'>
       <child>neck_1</child>
       <parent>chest</parent>
       <axis>
@@ -1482,7 +1482,7 @@
         </geometry>
       </visual>
     </link>
-    <joint name='neck_roll' type='revolute'>
+    <joint name='neck_roll' type='fixed'>
       <child>neck_2</child>
       <parent>neck_1</parent>
       <axis>
@@ -1543,7 +1543,7 @@
       </sensor>
 
     </link>
-    <joint name='neck_yaw' type='revolute'>
+    <joint name='neck_yaw' type='fixed'>
       <child>head</child>
       <parent>neck_2</parent>
       <axis>
@@ -1707,15 +1707,15 @@
 
       <sensor type="camera" name="camera_left">
         <pose>0 0 0 1.5708 3.1415 0</pose>
-        <update_rate>30.0</update_rate>
+        <update_rate>60.0</update_rate>
         <always_on>1</always_on>
         <visualize>true</visualize>
         <topic>/icub_model/left_eye_camera/image_raw</topic>
         <camera name="left_eye">
           <horizontal_fov>1.13</horizontal_fov>
           <image>
-            <width>4096</width>
-            <height>4096</height>
+            <width>1024</width>
+            <height>1024</height>
             <format>R8G8B8</format>
           </image>
           <clip>
