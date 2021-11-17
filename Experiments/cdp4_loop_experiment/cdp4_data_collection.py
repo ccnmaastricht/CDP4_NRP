@@ -37,7 +37,7 @@ class CDP4DataCollection:
         self.__image_sub = rospy.Subscriber("/icub/icub_model/left_eye_camera/image_raw", Image,
                                             self.__image_callback, queue_size=1)
 
-       # ROS Publishers
+        # ROS Publishers
         self.__set_model_state_pub = rospy.Publisher("/gazebo/set_model_state", ModelState,
                                                      queue_size=1)      
         self.__horizontal_pos_pub = rospy.Publisher("/icub/eye_version/pos", Float64, queue_size=1)
@@ -49,6 +49,8 @@ class CDP4DataCollection:
 
         rospy.wait_for_service("gazebo/spawn_sdf_entity")
         self.__spawn_model_srv = rospy.ServiceProxy("/gazebo/spawn_sdf_entity", SpawnEntity)
+
+        self.__delete_model_srv = rospy.ServiceProxy("/gazebo/delete_model", DeleteModel)
 
     @staticmethod
     def generate_random_pose(x_mean=-1.25, x_std=0.5, y_mean=0.5, y_std=0.25, z_mean=0.25,
@@ -102,6 +104,10 @@ class CDP4DataCollection:
             model_name = "_".join(parts)
 
         res = self.__spawn_model_srv(model_name, sdf, "", pose, reference_frame)
+        rospy.loginfo(res)
+
+    def delete_object(self, model_name):
+        res = self.__delete_model_srv(model_name)
         rospy.loginfo(res)
 
     def get_object_pose(self, object_name, reference_frame='world'):
