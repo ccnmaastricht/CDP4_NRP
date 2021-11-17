@@ -27,11 +27,16 @@ from spiking_saccade_generator.srv import MoveEyes
 @nrp.MapVariable("fig", initial_value=None)
 @nrp.MapVariable("plt", initial_value=None)
 @nrp.MapVariable("label", initial_value='%s')
-#@nrp.MapVariable("labels", initial_value='%s')
+@nrp.MapVariable("labels", initial_value=None)
+@nrp.MapVariable("eye_positions", initial_value=None)
+@nrp.MapVariable("dataset_path", initial_value='/home/bbpnrsoa/')
+@nrp.MapVariable("global_dataset_counter", initial_value=0)
+@nrp.MapVariable("counter", initial_value=1)
 @nrp.Robot2Neuron()
 def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, right_shoulder_pitch,
               left_shoulder_pitch, plotter, initialization, bridge, saliency_model, ts, np, tf, T_SIM,
-              Nrc, last_horizontal, last_vertical, previous_count, saccade_generator, fig, plt, label):
+              Nrc, last_horizontal, last_vertical, previous_count, saccade_generator, fig, plt, label,
+              labels, eye_positions, dataset_path, global_dataset_counter, counter):
 
     # initialize variables to persist
     if initialization.value is None:
@@ -39,6 +44,10 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
         # Put the icub arms down to avoid having them in the image
         right_shoulder_pitch.send_message(1.0)
         left_shoulder_pitch.send_message(1.0)
+
+        # move the eyes to the center
+        horizontal_eye_pos_pub.send_message(0)
+        vertical_eye_pos_pub.send_message(0)
 
         try:
             import os
@@ -71,8 +80,20 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
         saliency_model.value = tf.value.saved_model.load(os.path.join(os.environ['HOME'],
                                '.opt/nrpStorage/cdp4_loop_experiment_0/resources/salmodel/'))
         saliency_model.value = saliency_model.value.signatures['serving_default']
-
         ts.value = TS(PARAMS)
+
+        # Create directory to save data if it doesn't exist
+        if 'cdp4_dataset' not in os.listdir(dataset_path.value):
+            os.mkdir(dataset_path.value + 'cdp4_dataset')
+            labels.value = np.value.array([], dtype=int)
+            eye_positions.value = np.value.array([], dtype=float)
+        else:
+            # Load previous labels list and dataset_counter
+            existing_data = os.listdir(dataset_path.value + 'cdp4_dataset')
+            existing_data = [e for e in existing_data if 'png' in e]
+            global_dataset_counter.value = len(existing_data)
+            labels.value = np.value.load(dataset_path.value + 'cdp4_dataset/labels.npy')
+            eye_positions.value = np.value.load(dataset_path.value + 'cdp4_dataset/eye_positions.npy')
 
         clientLogger.info("Initialization ... Done!")
         initialization.value = True
@@ -81,18 +102,31 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
     if joints.value is not None and image.value is not None:
 
         import cv2
-
+        from PIL import Image
+        cv2_img = bridge.value.imgmsg_to_cv2(image.value, 'rgb8')
+        
         horizontal_eye_joint_name = 'eye_version'
         vertical_eye_joint_name = 'eye_tilt'
         horizontal_index = joints.value.name.index(horizontal_eye_joint_name)
         timestamp = (joints.value.header.stamp.secs, joints.value.header.stamp.nsecs)
         vertical_index = joints.value.name.index(vertical_eye_joint_name)
-        current_eye_pos = np.value.array([joints.value.position[horizontal_index],
-                                          joints.value.position[vertical_index]])
+        current_eye_pos = (joints.value.position[horizontal_index],
+                           joints.value.position[vertical_index])
         #clientLogger.info(t, current_eye_pos, timestamp)
 
+        # Save current image, eye positions, and label
+        if np.value.mod(counter.value, 10) == 0:
+            labels_dict = {'bed_room': 0, 'kitchen': 1, 'living_room': 2, 'office': 3}
+            labels.value = np.value.append(labels.value, labels_dict[label.value])
+            eye_positions.value = np.value.append(eye_positions.value, current_eye_pos)
+            im = Image.fromarray(cv2_img)
+            im_name = "{}.png".format(global_dataset_counter.value).zfill(8)
+            im.save(dataset_path.value + "cdp4_dataset/" + im_name)
+            np.value.save(dataset_path.value + "cdp4_dataset/eye_positions", eye_positions.value)
+            np.value.save(dataset_path.value + "cdp4_dataset/labels", labels.value)
+            global_dataset_counter.value = global_dataset_counter.value + 1
+
         # Convert ROS image to CV and resize
-        cv2_img = bridge.value.imgmsg_to_cv2(image.value, 'rgb8')
         cv2_img = cv2.resize(cv2_img, (320, 320))
 
         input_img = np.value.expand_dims(cv2_img, 0)
@@ -121,20 +155,25 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
         from utils import ind2rad
         target_h = ind2rad(target_selection_idx[1])
         target_v = ind2rad(target_selection_idx[0])
-        displacement_inp_h = target_h
-        displacement_inp_v = target_v
-        clientLogger.info("Displacements: {}, {}".format(displacement_inp_h, displacement_inp_v))
+        new_vert = current_eye_pos[1] - target_v * 1.13 / 2.0
+        new_hori = current_eye_pos[0] - target_h * 1.13 / 2.0
 
-        sg_output = saccade_generator.value(0., 1000., displacement_inp_h, displacement_inp_v,
-                                            last_horizontal.value, last_vertical.value,
-                                            previous_count.value)
+        clientLogger.info("Displacements: {}, {}".format(target_h, target_v))
 
-        clientLogger.info(sg_output)
+        #sg_output = saccade_generator.value(0., 1000., target_h, target_v, last_horizontal.value,
+        #                                    last_vertical.value, previous_count.value)
+        #clientLogger.info(sg_output)
 
-        horizontal_eye_pos_pub.send_message(sg_output.horizontal + current_eye_pos[0])
-        vertical_eye_pos_pub.send_message(sg_output.vertical + current_eye_pos[1])
+        #horizontal_eye_pos_pub.send_message(sg_output.horizontal + current_eye_pos[0])
+        #vertical_eye_pos_pub.send_message(sg_output.vertical + current_eye_pos[1])
         clientLogger.info("Eye Positions: {}, {}".format(current_eye_pos[0], current_eye_pos[1]))
 
-        last_horizontal.value = sg_output.horizontal
-        last_vertical.value = sg_output.vertical
-        previous_count.value = sg_output.previous_count_new
+        horizontal_eye_pos_pub.send_message(new_hori)
+        vertical_eye_pos_pub.send_message(new_vert)
+
+        #last_horizontal.value = sg_output.horizontal
+        #last_vertical.value = sg_output.vertical
+        #previous_count.value = sg_output.previous_count_new
+
+        counter.value = counter.value + 1
+
