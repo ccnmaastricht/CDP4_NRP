@@ -52,4 +52,22 @@ Please remember to disable the transfer function again after testing.
            After waking up from the sleep period, the transfer function will be deleted, and the 3d objects will be deleted. Then, a new loop iteration will be started, where another room/layout pair will be selected, and so on.
            The deletion of the transfer function during the spawning and deletion of 3d objects ensures, that data will only be recorded when rooms are fully spawned with objects.
 
+8. (Optional - to test the Saccade Generator separately) If you want to test the Saccade Generator ROS Service outside of the NRP, you first have to start the ROS service inside the docker container. In a terminal, run the following command:
+	`$ rosrun spiking_saccade_generator move_eyes.py`
 
+   In another terminal inside the docker container, you can call the rosservice with the desired inputs. For example:
+	`$ rosservice call /move_eyes "stim_time: 0.0
+                                       stim_duration: 0.0
+                                       saccade_size_horizontal: 0.0
+                                       saccade_size_vertical: 0.0
+                                       last_horizontal: 0.0
+                                       last_vertical: 0.0
+                                       previous_count: [0, 0, 0, 0]"`
+
+   You can use tab completion when typing the `rosservice call` command, which makes it easier to know what all the required inputs are.
+
+   There is also a python script in `resources/` called `test_saccade_generator.py` that you can run after starting the ROS service. The script runs the Saccade Generator multiple times inside a loop.
+
+   Note: If you modify the Saccade Generator code in `resources/spiking_saccade_generator_package/` you'll have to run the install.sh again to install the new package. Otherwise, your changes will not be taken into consideration.
+
+  
