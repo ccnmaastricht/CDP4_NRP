@@ -1,6 +1,6 @@
 <ns1:ExD xmlns:ns1="http://schemas.humanbrainproject.eu/SP10/2014/ExDConfig">
   <ns1:name>CDP4_scene_understanding</ns1:name>
-  <ns1:thumbnail>ExDSceneUnderstandingICub.png</ns1:thumbnail>
+  <ns1:thumbnail>ExDSceneUnderstandingICub.jpg</ns1:thumbnail>
   <ns1:description>In this experiment the iCub robot performs scene understanding</ns1:description>
   <ns1:tags>icub robotics visual holodeck</ns1:tags>
   <ns1:timeout>111111111840.0</ns1:timeout>

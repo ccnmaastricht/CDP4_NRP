@@ -4,5 +4,5 @@
   <ns1:bodyModel robotId="icub">model.sdf</ns1:bodyModel>
   <ns1:mode>SynchronousNengoSimulation</ns1:mode>
   <ns1:timestep>5</ns1:timestep>
-  <!-- <ns1:transferFunction src="cdp4_loop.py" active="true" priority="0" xsi:type="ns1:PythonTransferFunction" /> -->
+  <ns1:transferFunction src="cdp4_loop.py" active="true" priority="0" xsi:type="ns1:PythonTransferFunction" />
 </ns1:bibi>

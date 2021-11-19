@@ -1,9 +1,11 @@
 import os
 import rospy
 from std_msgs.msg import Float64
+from gazebo_msgs.msg import ModelState
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image, JointState
 from spiking_saccade_generator.srv import MoveEyes
+from gazebo_msgs.srv import SpawnEntity, DeleteModel
 
 @nrp.MapRobotSubscriber("image", Topic("/icub/icub_model/left_eye_camera/image_raw", Image))
 @nrp.MapRobotSubscriber("joints", Topic("/icub/joints", JointState))
@@ -12,6 +14,7 @@ from spiking_saccade_generator.srv import MoveEyes
 @nrp.MapRobotPublisher("right_shoulder_pitch", Topic("icub/r_shoulder_pitch/pos", Float64))
 @nrp.MapRobotPublisher("left_shoulder_pitch", Topic("icub/l_shoulder_pitch/pos", Float64))
 @nrp.MapRobotPublisher("plotter", Topic("/cdp4/visualizer", Image))
+@nrp.MapRobotPublisher("set_model_state", Topic("/gazebo/set_model_state", ModelState))
 @nrp.MapVariable("initialization", initial_value=None)
 @nrp.MapVariable("bridge", initial_value=None)
 @nrp.MapVariable("saliency_model", initial_value=None)
@@ -26,17 +29,13 @@ from spiking_saccade_generator.srv import MoveEyes
 @nrp.MapVariable("saccade_generator", initial_value=rospy.ServiceProxy('/move_eyes', MoveEyes))
 @nrp.MapVariable("fig", initial_value=None)
 @nrp.MapVariable("plt", initial_value=None)
-@nrp.MapVariable("label", initial_value='%s')
-@nrp.MapVariable("labels", initial_value=None)
-@nrp.MapVariable("eye_positions", initial_value=None)
-@nrp.MapVariable("dataset_path", initial_value='/home/bbpnrsoa/')
-@nrp.MapVariable("global_dataset_counter", initial_value=0)
-@nrp.MapVariable("counter", initial_value=1)
+@nrp.MapVariable("spawn_model", initial_value=rospy.ServiceProxy('/gazebo/spawn_sdf_entity', SpawnEntity))
+@nrp.MapVariable("delete_model", initial_value=rospy.ServiceProxy('/gazebo/delete_model', DeleteModel))
 @nrp.Robot2Neuron()
 def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, right_shoulder_pitch,
-              left_shoulder_pitch, plotter, initialization, bridge, saliency_model, ts, np, tf, T_SIM,
-              Nrc, last_horizontal, last_vertical, previous_count, saccade_generator, fig, plt, label,
-              labels, eye_positions, dataset_path, global_dataset_counter, counter):
+              left_shoulder_pitch, plotter, set_model_state,  initialization, bridge, saliency_model,
+              ts, np, tf, T_SIM, Nrc, last_horizontal, last_vertical, previous_count, saccade_generator,
+              fig, plt, spawn_model, delete_model):
 
     # initialize variables to persist
     if initialization.value is None:
@@ -67,6 +66,8 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
 
             from model_TS import TS
 
+            from run_experiment import spawn_room
+
         except:
             clientLogger.info("Unable to import TensorFlow, did you change the path in the transfer function?")
             raise
@@ -82,18 +83,8 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
         saliency_model.value = saliency_model.value.signatures['serving_default']
         ts.value = TS(PARAMS)
 
-        # Create directory to save data if it doesn't exist
-        if 'cdp4_dataset' not in os.listdir(dataset_path.value):
-            os.mkdir(dataset_path.value + 'cdp4_dataset')
-            labels.value = np.value.array([], dtype=int)
-            eye_positions.value = np.value.array([], dtype=float)
-        else:
-            # Load previous labels list and dataset_counter
-            existing_data = os.listdir(dataset_path.value + 'cdp4_dataset')
-            existing_data = [e for e in existing_data if 'png' in e]
-            global_dataset_counter.value = len(existing_data)
-            labels.value = np.value.load(dataset_path.value + 'cdp4_dataset/labels.npy')
-            eye_positions.value = np.value.load(dataset_path.value + 'cdp4_dataset/eye_positions.npy')
+        # spawn a room
+        spawn_room('living_room', 1, spawn_model.value, set_model_state)
 
         clientLogger.info("Initialization ... Done!")
         initialization.value = True
@@ -113,18 +104,6 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
         current_eye_pos = (joints.value.position[horizontal_index],
                            joints.value.position[vertical_index])
         #clientLogger.info(t, current_eye_pos, timestamp)
-
-        # Save current image, eye positions, and label
-        if np.value.mod(counter.value, 10) == 0:
-            labels_dict = {'bed_room': 0, 'kitchen': 1, 'living_room': 2, 'office': 3}
-            labels.value = np.value.append(labels.value, labels_dict[label.value])
-            eye_positions.value = np.value.append(eye_positions.value, current_eye_pos)
-            im = Image.fromarray(cv2_img)
-            im_name = "{}.png".format(global_dataset_counter.value).zfill(8)
-            im.save(dataset_path.value + "cdp4_dataset/" + im_name)
-            np.value.save(dataset_path.value + "cdp4_dataset/eye_positions", eye_positions.value)
-            np.value.save(dataset_path.value + "cdp4_dataset/labels", labels.value)
-            global_dataset_counter.value = global_dataset_counter.value + 1
 
         # Convert ROS image to CV and resize
         cv2_img = cv2.resize(cv2_img, (320, 320))
@@ -174,6 +153,4 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
         #last_horizontal.value = sg_output.horizontal
         #last_vertical.value = sg_output.vertical
         #previous_count.value = sg_output.previous_count_new
-
-        counter.value = counter.value + 1
 
