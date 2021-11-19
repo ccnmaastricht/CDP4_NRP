@@ -1707,7 +1707,7 @@
 
       <sensor type="camera" name="camera_left">
         <pose>0 0 0 1.5708 3.1415 0</pose>
-        <update_rate>60.0</update_rate>
+        <update_rate>600.0</update_rate>
         <always_on>1</always_on>
         <visualize>true</visualize>
         <topic>/icub_model/left_eye_camera/image_raw</topic>
@@ -1753,8 +1753,8 @@
       <axis>
         <xyz>0 -1 0</xyz>
         <limit>
-          <lower>-0.942477796</lower>
-          <upper>0.942477796</upper>
+          <lower>-0.78539</lower>
+          <upper>0.78539</upper>
           <effort>-1</effort>
 <!--          <velocity>100</velocity>-->
         </limit>
@@ -1876,8 +1876,8 @@
       <axis>
         <xyz>0 -1 0</xyz>
         <limit>
-          <lower>-0.942477796</lower>
-          <upper>0.942477796</upper>
+          <lower>-0.698131</lower>
+          <upper>0.698131</upper>
           <effort>-1</effort>
 <!--          <velocity>100</velocity>-->
         </limit>
