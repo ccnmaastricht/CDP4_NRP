@@ -13,14 +13,25 @@ create_overwrite() {
     fi
 }
 
-#create_overwrite "$HBP/Models/cdp4_objects"
-#cp -r objects/* $HBP/Models/cdp4_objects
-#$HBP/Models/create-symlinks.sh
+# Download 3d Models if they do not exist in $HBP/Models
+if [ ! -d $HBP/Models/FourRooms ]; then
+    echo "Download 3d models. This might take some time ..."
+    curl https://neurorobotics-files.net/index.php/s/XrrfZPi4Zstnny8/download --output FourRooms.zip
+    unzip FourRooms.zip
+    rm FourRooms.zip
+    mv FourRooms/ $HBP/Models
+    $HBP/Models/create-symlinks.sh
+fi
 
 # Update apt packages
 curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 sudo apt update
 sudo apt upgrade -y
+
+# install virtual coach dependencies
+pip install texttable
+pip install future
+pip install roslibpy
 
 # Create new virtual environment
 cd $HOME
@@ -28,9 +39,6 @@ virtualenv cdp4_venv
 source cdp4_venv/bin/activate
 pip install tensorflow
 pip install protobuf==3.9.2
-pip install texttable
-pip install future
-pip install roslibpy
 deactivate
 
 # Comment out CLE Line to avoid importing Nest
