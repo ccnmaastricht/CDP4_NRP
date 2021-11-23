@@ -1,0 +1,11 @@
+float64 stim_time
+float64 stim_duration
+float64 saccade_size_horizontal
+float64 saccade_size_vertical
+float64 last_horizontal
+float64 last_vertical
+uint16[4] previous_count
+---
+float64 horizontal
+float64 vertical
+uint16[4] previous_count_new
