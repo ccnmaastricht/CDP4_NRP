@@ -66,7 +66,7 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
 
             from model_TS import TS
 
-            from run_experiment import spawn_room
+            from spawn import spawn_room
 
         except:
             clientLogger.info("Unable to import TensorFlow, did you change the path in the transfer function?")

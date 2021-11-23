@@ -38,7 +38,7 @@ class CDP4DataCollection:
                                             self.__image_callback, queue_size=1)
 
         # ROS Publishers
-        self.__set_model_state_pub = rospy.Publisher("/gazebo/set_model_state", ModelState,
+        self.set_model_state_pub = rospy.Publisher("/gazebo/set_model_state", ModelState,
                                                      queue_size=1)      
         self.__horizontal_pos_pub = rospy.Publisher("/icub/eye_version/pos", Float64, queue_size=1)
         self.__vertical_pos_pub = rospy.Publisher("/icub/eye_tilt/pos", Float64, queue_size=1)
@@ -48,7 +48,7 @@ class CDP4DataCollection:
         self.__get_pose_srv = rospy.ServiceProxy("gazebo/get_model_state", GetModelState)
 
         rospy.wait_for_service("gazebo/spawn_sdf_entity")
-        self.__spawn_model_srv = rospy.ServiceProxy("/gazebo/spawn_sdf_entity", SpawnEntity)
+        self.spawn_model_srv = rospy.ServiceProxy("/gazebo/spawn_sdf_entity", SpawnEntity)
 
         self.__delete_model_srv = rospy.ServiceProxy("/gazebo/delete_model", DeleteModel)
 
@@ -103,7 +103,7 @@ class CDP4DataCollection:
                 parts.append('1')
             model_name = "_".join(parts)
 
-        res = self.__spawn_model_srv(model_name, sdf, "", pose, reference_frame)
+        res = self.spawn_model_srv(model_name, sdf, "", pose, reference_frame)
         rospy.loginfo(res)
 
     def delete_object(self, model_name):
@@ -136,7 +136,7 @@ class CDP4DataCollection:
         msg.scale.x = msg.scale.y = msg.scale.z = 1.0
 
         # publish message on ros topic
-        self.__set_model_state_pub.publish(msg)
+        self.set_model_state_pub.publish(msg)
 
     def capture_image(self):
         """
