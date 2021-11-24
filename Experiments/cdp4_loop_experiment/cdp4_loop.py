@@ -31,11 +31,13 @@ from gazebo_msgs.srv import SpawnEntity, DeleteModel
 @nrp.MapVariable("plt", initial_value=None)
 @nrp.MapVariable("spawn_model", initial_value=rospy.ServiceProxy('/gazebo/spawn_sdf_entity', SpawnEntity))
 @nrp.MapVariable("delete_model", initial_value=rospy.ServiceProxy('/gazebo/delete_model', DeleteModel))
+@nrp.MapVariable("global_salmap", initial_value=None)
+@nrp.MapVariable("global_weight", initial_value=None)
 @nrp.Robot2Neuron()
 def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, right_shoulder_pitch,
               left_shoulder_pitch, plotter, set_model_state,  initialization, bridge, saliency_model,
               ts, np, tf, T_SIM, Nrc, last_horizontal, last_vertical, previous_count, saccade_generator,
-              fig, plt, spawn_model, delete_model):
+              fig, plt, spawn_model, delete_model, global_salmap, global_weight):
 
     # initialize variables to persist
     if initialization.value is None:
@@ -53,10 +55,10 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
             import sys
             sys.path.insert(0, '/home/bbpnrsoa/cdp4_venv/lib/python3.8/site-packages')
 
-            import numpy 
+            import numpy
             np.value = numpy
 
-            import tensorflow 
+            import tensorflow
             tf.value = tensorflow
 
             import matplotlib.pyplot
@@ -81,6 +83,10 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
         saliency_model.value = tf.value.saved_model.load(os.path.join(os.environ['HOME'],
                                '.opt/nrpStorage/cdp4_loop_experiment_0/resources/salmodel/'))
         saliency_model.value = saliency_model.value.signatures['serving_default']
+
+        from utils import get_global_salmap
+        global_salmap.value, global_weight.value = get_global_salmap(0.942477796)
+
         ts.value = TS(PARAMS)
 
         # spawn a room
@@ -95,7 +101,7 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
         import cv2
         from PIL import Image
         cv2_img = bridge.value.imgmsg_to_cv2(image.value, 'rgb8')
-        
+
         horizontal_eye_joint_name = 'eye_version'
         vertical_eye_joint_name = 'eye_tilt'
         horizontal_index = joints.value.name.index(horizontal_eye_joint_name)
@@ -112,8 +118,26 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
         input_img = tf.value.convert_to_tensor(input_img, dtype='float')
         saliency_map = saliency_model.value(input_img)['out'].numpy().squeeze()
 
+        # make the saliency map more peaky (optional)
+        saliency_map = np.value.power(saliency_map, 4)
+
+        from utils import rad2ind, add_mat2mat, weight_decay
+
+        # minus needed because axes are flipped
+        px_ind_vert = -rad2ind(current_eye_pos[1], 0.942477796)
+        px_ind_hori = -rad2ind(current_eye_pos[0], 0.942477796)
+        px_ind = (px_ind_vert, px_ind_hori)
+
+        global_salmap.value, global_weight.value = add_mat2mat(global_salmap.value,
+                                                               global_weight.value,
+                                                               saliency_map, px_ind)
+
+        global_salmap.value = global_salmap.value * global_weight.value
+        global_weight.value = weight_decay(global_weight.value)
+
         # plot saliency map
-        plt.value.imshow(saliency_map, cmap="gray")
+        plt.value.imshow(global_salmap.value, cmap="gray")
+        plt.value.axis("off")
         fig.value.canvas.draw()
         plt.value.tight_layout()
 
@@ -153,4 +177,3 @@ def cdp4_loop(t, image, joints, horizontal_eye_pos_pub, vertical_eye_pos_pub, ri
         #last_horizontal.value = sg_output.horizontal
         #last_vertical.value = sg_output.vertical
         #previous_count.value = sg_output.previous_count_new
-
