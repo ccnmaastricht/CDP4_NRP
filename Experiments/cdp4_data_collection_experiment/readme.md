@@ -35,15 +35,19 @@ Follow those steps in order to get the CDP4 Loop Experiment running:
 6. To run the experiment (spawning room layouts, moving the eyes, and saving data to disk), follow the following steps:
 
 	a. Navigate to the experiment directory inside the docker container
-		`$ cd /home/bbpnrsoa/.opt/nrpStorage/cdp4_data_collection_experiment_0/resources/`
+
+                `$ cd /home/bbpnrsoa/.opt/nrpStorage/cdp4_data_collection_experiment_0/resources/`
+
 
         b. (Optional) If you want to record a new dataset, make sure the dataset directory is deleted
+
 		`rm -rf /home/bbpnrsoa/cdp4_dataset`
+
 
 	   If this directory exists and contains some data, running the experiment will amend the newly generated data to the existing dataset.
 
-	c. Run the run_experiment_script
-		`$ python run_experiment.py`
+	c. Run the run_experiment_script `$ python run_experiment.py`
+
 
 	   This script will launch the experiment, and inside a loop will select a random room/layout pair and spawn the corresponding objects. It will then add the transfer function to the running simulation, and sleep for a certain amount of time. During this sleep period, the experiment will be running with the transfer function and data will be recorded to disk. You can modify this sleep time to increase or decrease the amount of data you want to record from one layout.
            After waking up from the sleep period, the transfer function will be deleted, and the 3d objects will be deleted. Then, a new loop iteration will be started, where another room/layout pair will be selected, and so on.
