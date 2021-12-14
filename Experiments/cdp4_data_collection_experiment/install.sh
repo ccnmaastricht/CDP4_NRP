@@ -50,10 +50,10 @@ sudo chown -R bbpnrsoa:bbp-ext resources/
 
 # Install spiking_saccade_generator ROS Package
 if [ ! -d $HBP/GazeboRosPackages/src/spiking_saccade_generator ]; then
-    cp -r resources/spiking_saccade_generator_package $HBP/GazeboRosPackages/src/spiking_saccade_generator
+    cp -r /home/bbpnrsoa/.opt/nrpStorage/cdp4_data_collection_experiment_0/resources/spiking_saccade_generator_package $HBP/GazeboRosPackages/src/spiking_saccade_generator
 else
     rm -rf $HBP/GazeboRosPackages/src/spiking_saccade_generator
-    cp -r resources/spiking_saccade_generator_package $HBP/GazeboRosPackages/src/spiking_saccade_generator
+    cp -r /home/bbpnrsoa/.opt/nrpStorage/cdp4_data_collection_experiment_0/resources/spiking_saccade_generator_package $HBP/GazeboRosPackages/src/spiking_saccade_generator
 fi
 cd $HBP/GazeboRosPackages/
 catkin build
