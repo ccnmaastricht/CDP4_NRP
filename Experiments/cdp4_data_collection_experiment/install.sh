@@ -45,15 +45,14 @@ deactivate
 sed -i '44 s/^#*/#/' $HBP/CLE/hbp_nrp_cle/hbp_nrp_cle/brainsim/__init__.py
 
 # Change saliency model owner to be able to delete experiment if needed
-cd $HOME/.opt/nrpStorage/cdp4_loop_experiment_0
-sudo chown -R bbpnrsoa:bbp-ext resources/
+sudo chown -R bbpnrsoa:bbp-ext $HOME/.opt/nrpStorage/cdp4_data_collection_experiment_0/resources/
 
 # Install spiking_saccade_generator ROS Package
 if [ ! -d $HBP/GazeboRosPackages/src/spiking_saccade_generator ]; then
-    cp -r /home/bbpnrsoa/.opt/nrpStorage/cdp4_data_collection_experiment_0/resources/spiking_saccade_generator_package $HBP/GazeboRosPackages/src/spiking_saccade_generator
+    cp -r $HOME/.opt/nrpStorage/cdp4_data_collection_experiment_0/resources/spiking_saccade_generator_package $HBP/GazeboRosPackages/src/spiking_saccade_generator
 else
     rm -rf $HBP/GazeboRosPackages/src/spiking_saccade_generator
-    cp -r /home/bbpnrsoa/.opt/nrpStorage/cdp4_data_collection_experiment_0/resources/spiking_saccade_generator_package $HBP/GazeboRosPackages/src/spiking_saccade_generator
+    cp -r $HOME/.opt/nrpStorage/cdp4_data_collection_experiment_0/resources/spiking_saccade_generator_package $HBP/GazeboRosPackages/src/spiking_saccade_generator
 fi
 cd $HBP/GazeboRosPackages/
 catkin build
