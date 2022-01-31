@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="beer">
+    <link name="link">
+      <pose>0 0 0.115 0 0 0</pose>
+      <inertial>
+        <mass>0.390</mass>
+        <inertia>
+          <ixx>0.00058</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00058</iyy>
+          <iyz>0</iyz>
+          <izz>0.00019</izz>
+        </inertia>
+      </inertial>
+      <sensor name="logical_camera" type="logical_camera">
+         <logical_camera>
+           <near>0.55</near>
+           <far>2.5</far>
+           <horizontal_fov>1.05</horizontal_fov>
+           <aspect_ratio>1.8</aspect_ratio>
+         </logical_camera>
+
+         <visualize>true</visualize>
+         <always_on>true</always_on>
+         <update_rate>10</update_rate>
+       </sensor>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>0.055000</radius>
+            <length>0.230000</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <radius>0.055000</radius>
+            <length>0.230000</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://beer/materials/scripts</uri>
+            <uri>model://beer/materials/textures</uri>
+            <name>Beer/Diffuse</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <plugin name="ros_logical_camera" filename="libROSLogicalCameraPlugin.so">
+           <robotNamespace>ariac</robotNamespace>
+           <position_noise>
+             <noise>
+               <type>gaussian</type>
+               <mean>0.0</mean>
+              <stddev>0.001</stddev>
+            </noise>
+          </position_noise>
+          <orientation_noise>
+            <noise>
+              <type>gaussian</type>
+              <mean>0.0</mean>
+              <stddev>0.01</stddev>
+            </noise>
+          </orientation_noise>
+    </plugin>
+
+  </model>
+</sdf>
