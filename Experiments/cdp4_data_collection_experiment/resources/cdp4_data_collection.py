@@ -7,7 +7,7 @@ from sensor_msgs.msg import Image
 from geometry_msgs.msg import Pose
 from gazebo_msgs.msg import ModelState, ModelStates
 from cv_bridge import CvBridge, CvBridgeError
-from gazebo_msgs.srv import GetModelState, GetWorldProperties, SpawnEntity, DeleteModel
+from gazebo_msgs.srv import GetModelState, GetWorldProperties, SpawnEntity, DeleteModel, SetModelState
 from tf.transformations import quaternion_from_euler, euler_from_quaternion
 
 
@@ -51,6 +51,8 @@ class CDP4DataCollection:
         self.spawn_model_srv = rospy.ServiceProxy("/gazebo/spawn_sdf_entity", SpawnEntity)
 
         self.__delete_model_srv = rospy.ServiceProxy("/gazebo/delete_model", DeleteModel)
+
+        self.__set_model_state_srv = rospy.ServiceProxy("/gazebo/set_model_state", SetModelState)
 
     @staticmethod
     def generate_random_pose(x_mean=-1.25, x_std=0.5, y_mean=0.5, y_std=0.25, z_mean=0.25,
@@ -136,7 +138,8 @@ class CDP4DataCollection:
         msg.scale.x = msg.scale.y = msg.scale.z = 1.0
 
         # publish message on ros topic
-        self.set_model_state_pub.publish(msg)
+        #self.set_model_state_pub.publish(msg)
+        self.__set_model_state_srv(msg)
 
     def capture_image(self):
         """

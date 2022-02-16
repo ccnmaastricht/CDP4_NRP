@@ -1604,8 +1604,8 @@
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
-          <lower>-0.942477796</lower>
-          <upper>0.942477796</upper>
+          <lower>-0.698131</lower>
+          <upper>0.698131</upper>
 <!--           change -->
            <effort>-1</effort>
 <!--           <velocity>100</velocity> -->
@@ -1680,39 +1680,28 @@
         </geometry>
       </visual>
 
-      <sensor name='dvs' type='camera'>
-        <visualize>1</visualize>
-        <camera name='__default__'>
-          <horizontal_fov>1.8</horizontal_fov>
-          <image>
-            <width>128</width>
-            <height>128</height>
-          </image>
-          <clip>
-            <near>0.1</near>
-            <far>100</far>
-          </clip>
-        </camera>
-        <always_on>1</always_on>
-        <update_rate>60</update_rate>
-        <visualize>0</visualize>
-        <plugin name='camera_controller' filename='libgazebo_dvs_plugin.so'>
-          <cameraName>dvs_left</cameraName>
-          <robotNamespace>head</robotNamespace>
-          <eventThreshold>10</eventThreshold>
-          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-        </plugin>
-        <pose>0 0 0 1.570796327 3.141592654 -0.55</pose>
+      <sensor name="logical_camera" type="logical_camera">
+	 <pose>0 0 0 1.5708 3.1415 0</pose>
+	 <logical_camera>
+           <near>0.1</near>
+           <far>5</far>
+           <horizontal_fov>2.26</horizontal_fov>
+           <aspect_ratio>1.8</aspect_ratio>
+         </logical_camera>
+
+         <visualize>true</visualize>
+         <always_on>true</always_on>
+         <update_rate>10</update_rate>
       </sensor>
 
       <sensor type="camera" name="camera_left">
         <pose>0 0 0 1.5708 3.1415 0</pose>
-        <update_rate>60.0</update_rate>
+        <update_rate>600.0</update_rate>
         <always_on>1</always_on>
         <visualize>true</visualize>
         <topic>/icub_model/left_eye_camera/image_raw</topic>
         <camera name="left_eye">
-          <horizontal_fov>1.13</horizontal_fov>
+          <horizontal_fov>2.26</horizontal_fov>
           <image>
             <width>1024</width>
             <height>1024</height>
@@ -1753,8 +1742,8 @@
       <axis>
         <xyz>0 -1 0</xyz>
         <limit>
-          <lower>-0.942477796</lower>
-          <upper>0.942477796</upper>
+          <lower>-0.78539</lower>
+          <upper>0.78539</upper>
           <effort>-1</effort>
 <!--          <velocity>100</velocity>-->
         </limit>
@@ -1876,8 +1865,8 @@
       <axis>
         <xyz>0 -1 0</xyz>
         <limit>
-          <lower>-0.942477796</lower>
-          <upper>0.942477796</upper>
+          <lower>-0.78539</lower>
+          <upper>0.78539</upper>
           <effort>-1</effort>
 <!--          <velocity>100</velocity>-->
         </limit>
@@ -2269,5 +2258,22 @@
     <plugin name="ROSController_iCub" filename="libcontroller_ros_gazebo_icub.so">
     </plugin>
     <plugin name="InitiCub" filename="libicub_initialization.so"/>
+    <plugin name="ros_logical_camera" filename="libROSLogicalCameraPlugin.so">
+           <robotNamespace>ariac</robotNamespace>
+           <position_noise>
+             <noise>
+               <type>gaussian</type>
+               <mean>0.0</mean>
+              <stddev>0.001</stddev>
+            </noise>
+          </position_noise>
+          <orientation_noise>
+            <noise>
+              <type>gaussian</type>
+              <mean>0.0</mean>
+              <stddev>0.01</stddev>
+            </noise>
+          </orientation_noise>
+    </plugin>
   </model>
 </sdf>

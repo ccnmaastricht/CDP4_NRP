@@ -46,6 +46,48 @@ def delete_object(model_name, delete_object_srv):
     delete_object_srv(model_name) 
 
 
+def debuild_room(spawned_models, set_model_state_pub):
+    storage_pose = generate_pose(20, 0, 0, 0, 0, 0)
+    for model in spawned_models:
+        set_object_pose(model, storage_pose, set_model_state_pub)
+
+
+def build_room(room_name, layout_number, set_model_state_pub, layout_file='layout.yaml'):
+    path_to_room = path_to_models + room_name + '/'
+    spawned_models = []
+    with open(path_to_room + layout_file) as f:
+        yaml_file = yaml.load(f)
+
+    layout = "Layout" + str(layout_number)
+    for entity in yaml_file[layout]:
+        if(entity["folder"] == "icub_model"):
+            positions = entity["positions"]
+            position = random.choice(list(positions.values()))
+            pose = generate_pose(position['x'], position['y'], position['z'],
+                                 position['ox'], position['oy'], position['oz'])
+            print('Adding icub at position {}'.format(pose))
+            set_object_pose('icub', pose, set_model_state_pub)  
+        elif entity["has_subfolder"]:
+            available_models = os.listdir(path_to_room + entity["folder"])
+            model_name = np.random.choice(available_models)
+            spawned_models.append(model_name)
+            position = entity["position"]
+            pose = generate_pose(position['x'], position['y'], position['z'],
+                                 position['ox'], position['oy'], position['oz'])
+            print('Adding {} at position {}'.format(model_name, pose))
+            set_object_pose(model_name, pose, set_model_state_pub)
+        else:
+            spawned_models.append(entity["folder"])
+            position = entity["position"]
+            pose = generate_pose(position['x'], position['y'], position['z'],
+                                 position['ox'], position['oy'], position['oz'])
+            path = path_to_room + entity["folder"] + '/'
+            print('Adding {} at position {}'.format(entity["folder"], pose))
+            set_object_pose(model_name, pose, set_model_state_pub)
+
+    return spawned_models
+
+
 def spawn_room(room_name, layout_number, spawn_model_srv, set_model_state_pub, layout_file='layout.yaml'):
     path_to_room = path_to_models + room_name + '/'
     spawned_models = []
@@ -54,7 +96,7 @@ def spawn_room(room_name, layout_number, spawn_model_srv, set_model_state_pub, l
 
     layout = "Layout" + str(layout_number)
     for entity in yaml_file[layout]:
-        if(entity["folder"] == "icub"):
+        if(entity["folder"] == "icub_model"):
             positions = entity["positions"]
             position = random.choice(list(positions.values()))
             pose = generate_pose(position['x'], position['y'], position['z'],

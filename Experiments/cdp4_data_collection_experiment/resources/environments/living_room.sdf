@@ -2,11 +2,11 @@
   <world name="default">
     <light name="sun" type="directional">
       <pose frame="">7.485 -12.379 17.2198 0 -0 0</pose>
-      <diffuse>0.2 0.2 0.2 1</diffuse>
+      <diffuse>0.7 0.7 0.7 1</diffuse>
       <specular>0.2 0.2 0.2 1</specular>
       <direction>-0.1698 0.1 -0.3</direction>
       <attenuation>
-        <range>10</range>
+        <range>1000</range>
         <constant>0.9</constant>
         <linear>0.01</linear>
         <quadratic>0.001</quadratic>
@@ -27,7 +27,7 @@
     </light>
     <gravity>0 0 -9.8</gravity>
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
-    <atmosphere type="adiabatic" />
+    <atmosphere type="adiabatic"/>
     <physics name="default_physics" default="0" type="ode">
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1</real_time_factor>
@@ -38,7 +38,7 @@
       <background>0.7 0.7 0.7 1</background>
       <shadows>1</shadows>
     </scene>
-    <wind />
+    <wind/>
     <spherical_coordinates>
       <surface_model>EARTH_WGS84</surface_model>
       <latitude_deg>0</latitude_deg>
@@ -398,14 +398,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -445,14 +445,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -492,14 +492,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -539,14 +539,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -586,14 +586,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -633,14 +633,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -680,14 +680,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -727,14 +727,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -774,14 +774,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -821,14 +821,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -868,14 +868,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -916,14 +916,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -964,14 +964,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1012,14 +1012,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1060,14 +1060,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1108,14 +1108,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1155,14 +1155,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1199,14 +1199,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1246,14 +1246,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1293,14 +1293,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1340,14 +1340,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1387,14 +1387,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1434,14 +1434,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1481,14 +1481,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1528,14 +1528,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1598,14 +1598,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1646,14 +1646,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1694,14 +1694,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1742,14 +1742,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1790,14 +1790,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1837,14 +1837,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1880,14 +1880,14 @@
           <max_contacts>10</max_contacts>
           <surface>
             <contact>
-              <ode />
+              <ode/>
             </contact>
-            <bounce />
+            <bounce/>
             <friction>
               <torsional>
-                <ode />
+                <ode/>
               </torsional>
-              <ode />
+              <ode/>
             </friction>
           </surface>
         </collision>
@@ -1914,5 +1914,985 @@
       <pose frame="">-5.47636 -3.31669 0 0 -0 1.5708</pose>
       <pose frame="">-5.47636 -3.31669 0 0 -0 1.5708</pose>
     </model>
-  <include><static>true</static><uri>model://Bed3</uri><pose>-0.5 -1.5 0.0 0.0 0.0 1.5707963267948966</pose></include><include><static>true</static><uri>model://Wardrobe4</uri><pose>0.25 1.2 0.0 0.0 0.0 1.5707963267948966</pose></include><include><static>true</static><uri>model://ReadingDesk0</uri><pose>-1.4 1.8 0.0 0.0 0.0 1.5707963267948966</pose></include><include><static>true</static><uri>model://NightStand14</uri><pose>0.5 -0.25 0.0 0.0 0.0 1.5707963267948966</pose></include><include><static>true</static><uri>model://BedroomChair12</uri><pose>-2.1 1.8 0.0 0.0 0.0 4.71238898038469</pose></include></world>
+      
+    <!-- <include>
+      <static>true</static>
+      <uri>model://Bed11</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Bed12</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Bed13</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Bed3</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Bed6</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Bed7</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Bed8</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Bed9</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+
+    <include>
+      <static>true</static>
+      <uri>model://BedroomChair0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://BedroomChair1</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://BedroomChair4</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://BedroomChair5</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://BedroomChair6</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://BedroomChair8</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://BedroomChair9</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://BedroomChair12</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://BedroomChair14</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://NightStand1</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://NightStand10</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://NightStand11</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://NightStand13</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://NightStand14</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://NightStand15</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://NightStand2</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://NightStand5</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://NightStand6</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://NightStand7</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://NightStand8</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://NightStand9</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://ReadingDesk0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://ReadingDesk10</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://ReadingDesk6</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://ReadingDesk8</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://ReadingDesk9</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Wardrobe10</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Wardrobe11</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Wardrobe12</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Wardrobe2</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Wardrobe3</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Wardrobe4</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Wardrobe5</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Wardrobe6</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Wardrobe7</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Wardrobe8</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Wardrobe9</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> -->
+
+
+
+
+    <!-- <include>
+      <static>true</static>
+      <uri>model://OfficeChair1</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://OfficeChair10</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://OfficeChair11</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://OfficeChair13</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://OfficeChair3</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://OfficeChair7</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://OfficeChair8</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://OfficeChair9</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://OfficeTable0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://OfficeTable1</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://OfficeTable2</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://OfficeTable3</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://OfficeTable4</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://OfficeTable5</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://OfficeTable6</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://OfficeTable7</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://OfficeTable8</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://OfficeTable9</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Laptop0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Laptop1</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Laptop2</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Laptop3</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Laptop4</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Laptop5</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://CurvedMonitor0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://CurvedMonitor1</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://CurvedMonitor2</uri>
+    </include>
+    <include>
+      <static>true</static>
+      <uri>model://Bookshelf0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Bookshelf1</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Bookshelf10</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Bookshelf2</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Bookshelf4</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Bookshelf5</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Bookshelf6</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Bookshelf7</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Bookshelf8</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Bookshelf9</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://FileCabinet0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://FileCabinet1</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://FileCabinet2</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://FileCabinet3</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://FileCabinet4</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://FileCabinet6</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> -->
+
+
+
+
+     
+    <!-- <include>
+      <static>true</static>
+      <uri>model://CoffeeMachine0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenCabinet1</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenCabinet2</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenCabinet3</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenCabinet4</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenCabinet5</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenCabinet6</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenCabinet7</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenCabinet8</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenCabinet9</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenTable0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenTable10</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenTable11</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenTable13</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenTable14</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenTable2</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenTable3</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenTable6</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenTable7</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenTable8</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://KitchenTable9</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Oven10</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Oven12</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Oven2</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Oven3</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Oven4</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Oven5</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Oven9</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Refrigerator13</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Refrigerator14</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Refrigerator3</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Refrigerator4</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Refrigerator8</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Refrigerator9</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://BottleBeer0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://BottleRedWine0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://BottleWhiteWine0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Cola0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://CupBlue0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://CupGlass0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://CupGlass1</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://CupGreen0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://CupPaper0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://CupYellow0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://MugBeer0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Trash0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> -->
+    
+
+
+    <include>
+      <static>true</static>
+      <uri>model://AirConditioner0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://AirConditioner1</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Carpet0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Carpet1</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Carpet10</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Carpet11</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Carpet12</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Carpet13</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Carpet14</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Carpet2</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Carpet3</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Carpet4</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Carpet5</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Carpet6</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Carpet7</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Carpet8</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Carpet9</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://FloorLamp0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include>  
+    <include>
+      <static>true</static>
+      <uri>model://Sofa10</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Sofa11</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Sofa12</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Sofa13</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Sofa3</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Sofa4</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Sofa5</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Sofa6</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Sofa7</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Sofa8</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://Sofa9</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include>
+    <include>
+      <static>true</static>
+      <uri>model://TV0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include>  
+    <include>
+      <static>true</static>
+      <uri>model://TV1</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TV2</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TV3</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TV4</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TV5</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TV6</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TV7</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TV8</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TV9</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TVCabinet0</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TVCabinet1</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TVCabinet10</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TVCabinet12</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TVCabinet13</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TVCabinet2</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TVCabinet3</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TVCabinet4</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TVCabinet5</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TVCabinet7</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TVCabinet8</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://TVCabinet9</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://LivingRoomTable11</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://LivingRoomTable12</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://LivingRoomTable2</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://LivingRoomTable5</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://LivingRoomTable6</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://LivingRoomTable7</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://LivingRoomTable8</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include> 
+    <include>
+      <static>true</static>
+      <uri>model://LivingRoomTable9</uri>
+      <pose>10.503 0.382 0.025 0.0 -0.0 1.57</pose>
+    </include>
+
+
+  </world>
 </sdf>

@@ -1,21 +1,21 @@
-<ns1:ExD xmlns:ns1="http://schemas.humanbrainproject.eu/SP10/2014/ExDConfig">
-  <ns1:name>CDP4 Data Collection Experiment</ns1:name>
-  <ns1:thumbnail>ExDSceneUnderstandingICub.png</ns1:thumbnail>
-  <ns1:description>In this experiment the iCub robot performs scene understanding</ns1:description>
-  <ns1:tags>icub robotics visual holodeck</ns1:tags>
-  <ns1:timeout>111111111840.0</ns1:timeout>
-  <ns1:configuration src="ExDSceneUnderstandingICub.ini" type="3d-settings"/>
-  <ns1:configuration src="brainvisualizer.json" type="brainvisualizer"/>
-  <ns1:configuration src="ExDSceneUnderstandingICub.uis" type="user-interaction-settings"/>
-  <ns1:maturity>production</ns1:maturity>
-  <ns1:environmentModel src="virtual_room_tracking_icub.sdf">
-    <ns1:robotPose pitch="-0.00137903657742" robotId="icub" roll="0.000148881415953" x="-2.59457755089" y="0.669566214085" yaw="2.90969991684" z="0.6401039958"/>
-  </ns1:environmentModel>
-  <ns1:bibiConf src="bibi_configuration.bibi"/>
-  <ns1:cameraPose>
-    <ns1:cameraPosition x="2.15042024657" y="1.23814627784" z="1.33805071957"/>
-    <ns1:cameraLookAt x="0.0" y="1.48" z="0.6"/>
-  </ns1:cameraPose>
-  <ns1:cloneDate>2020-02-25T10:47:48</ns1:cloneDate>
-  <ns1:rosLaunch src="saccade_generator.launch" />
-</ns1:ExD>
+<ns0:ExD xmlns:ns0="http://schemas.humanbrainproject.eu/SP10/2014/ExDConfig">
+  <ns0:name>CDP4 Data Collection Experiment</ns0:name>
+  <ns0:thumbnail>ExDSceneUnderstandingICub.png</ns0:thumbnail>
+  <ns0:description>In this experiment the iCub robot performs scene understanding</ns0:description>
+  <ns0:tags>icub robotics visual holodeck</ns0:tags>
+  <ns0:timeout>111111111840.0</ns0:timeout>
+  <ns0:configuration src="ExDSceneUnderstandingICub.ini" type="3d-settings" />
+  <ns0:configuration src="brainvisualizer.json" type="brainvisualizer" />
+  <ns0:configuration src="ExDSceneUnderstandingICub.uis" type="user-interaction-settings" />
+  <ns0:maturity>production</ns0:maturity>
+  <ns0:environmentModel src="virtual_room_tracking_icub.sdf">
+    <ns0:robotPose pitch="0.0" robotId="icub" roll="0.0" x="-2" y="-1" yaw="3.7524578917878086" z="0.7" />
+  </ns0:environmentModel>
+  <ns0:bibiConf src="bibi_configuration.bibi" />
+  <ns0:cameraPose>
+    <ns0:cameraPosition x="2.15042024657" y="1.23814627784" z="1.33805071957" />
+    <ns0:cameraLookAt x="0.0" y="1.48" z="0.6" />
+  </ns0:cameraPose>
+  <ns0:cloneDate>2020-02-25T10:47:48</ns0:cloneDate>
+  <ns0:rosLaunch src="saccade_generator.launch" />
+</ns0:ExD>
