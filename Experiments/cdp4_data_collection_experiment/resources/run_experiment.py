@@ -17,7 +17,7 @@ from tf.transformations import quaternion_from_euler, euler_from_quaternion
 
 n_layouts = 3
 n_sequences = 8
-sequence_time = 200
+sequence_time = 800
 rooms = ['bed_room', 'kitchen', 'living_room', 'office']
 
 
@@ -49,14 +49,17 @@ def modify_robot_initial_pose(pose):
     et.write('../experiment_configuration.exc')
 
 
-def insert_sdf_room(room_name, layout_file='layout.yaml'):
+def insert_sdf_room(room_name, layout=None, layout_file='layout.yaml'):
     path_to_room = os.getenv("HBP") + "/Models/FourRooms/" + room_name + '/'
     spawned_models = []
     with open(path_to_room + layout_file) as f:
         yaml_file = yaml.load(f)
     
-    layout = "Layout" + str(np.random.randint(0, n_layouts))
-    print("Building room: {}, {}".format(room, layout))
+    if layout == None:
+        layout = "Layout" + str(np.random.randint(0, n_layouts))
+    else:
+        layout = "Layout{}".format(layout) 
+    print("Building room: {}, {}".format(room_name, layout))
     for entity in yaml_file[layout]:
         if(entity["folder"] == "icub_model"):
             positions = entity["positions"]

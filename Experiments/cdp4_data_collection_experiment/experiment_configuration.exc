@@ -9,12 +9,12 @@
   <ns0:configuration src="ExDSceneUnderstandingICub.uis" type="user-interaction-settings" />
   <ns0:maturity>production</ns0:maturity>
   <ns0:environmentModel src="virtual_room_tracking_icub.sdf">
-    <ns0:robotPose pitch="0.0" robotId="icub" roll="0.0" x="-2" y="-1" yaw="3.7524578917878086" z="0.7" />
+    <ns0:robotPose pitch="0.0" robotId="icub" roll="0.0" x="-2" y="1" yaw="2.530727415391778" z="0.7" />
   </ns0:environmentModel>
   <ns0:bibiConf src="bibi_configuration.bibi" />
   <ns0:cameraPose>
-    <ns0:cameraPosition x="2.15042024657" y="1.23814627784" z="1.33805071957" />
-    <ns0:cameraLookAt x="0.0" y="1.48" z="0.6" />
+    <ns0:cameraPosition x="0.0" y="0.0" z="6.7" />
+    <ns0:cameraLookAt x="0.0" y="0.0" z="0.0" />
   </ns0:cameraPose>
   <ns0:cloneDate>2020-02-25T10:47:48</ns0:cloneDate>
   <ns0:rosLaunch src="saccade_generator.launch" />

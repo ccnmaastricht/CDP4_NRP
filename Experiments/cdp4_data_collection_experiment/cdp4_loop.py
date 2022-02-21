@@ -138,7 +138,7 @@ def cdp4_loop (t, image, joints, logical_image, horizontal_eye_pos_pub, vertical
                            joints.value.position[vertical_index])
 
         # Save current image, eye positions, and label
-        if np.value.mod(loop_counter.value, 5) == 0:
+        if target_selection_idx.value != [31.5,31.5] and np.value.mod(loop_counter.value, 10) == 0:
             labels_dict = {'bed_room': 0, 'kitchen': 1, 'living_room': 2, 'office': 3}
             labels.value = np.value.append(labels.value, labels_dict[label.value])
             eye_positions.value = np.value.append(eye_positions.value, current_eye_pos)
@@ -236,3 +236,4 @@ def cdp4_loop (t, image, joints, logical_image, horizontal_eye_pos_pub, vertical
         previous_count.value = sg_output.previous_count_new
 
         loop_counter.value = loop_counter.value + 1
+        clientLogger.info("Counter: {}".format(loop_counter.value))
