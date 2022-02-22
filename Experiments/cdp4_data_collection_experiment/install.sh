@@ -16,8 +16,7 @@ create_overwrite() {
 # Download 3d Models if they do not exist in $HBP/Models
 if [ ! -d $HBP/Models/FourRooms ]; then
     echo "Download 3d models. This might take some time ..."
-    #curl https://neurorobotics-files.net/index.php/s/XrrfZPi4Zstnny8/download --output FourRooms.zip
-    curl https://neurorobotics-files.net/index.php/s/g6QA6bpZDMnk4j2/download --output FourRooms.zip
+    curl https://neurorobotics-files.net/index.php/s/EGSWgDPyrTeExLA/download --output FourRooms.zip
     unzip FourRooms.zip
     rm FourRooms.zip
     mv FourRooms/ $HBP/Models

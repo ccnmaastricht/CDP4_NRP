@@ -48,6 +48,11 @@ from gazebo_ros_logical_camera.msg import LogicalCameraImage
 @nrp.MapVariable("dataset_path", initial_value='/home/bbpnrsoa/')
 @nrp.MapVariable("global_dataset_counter", initial_value=0)
 
+@nrp.MapRobotPublisher("plotter1", Topic("/cdp4/targetselection", Image))
+@nrp.MapRobotPublisher("plotter2", Topic("/cdp4/saliencyvisualizer", Image))
+@nrp.MapVariable("fig", initial_value=None)
+@nrp.MapVariable("plt", initial_value=None)
+
 @nrp.Robot2Neuron()
 def cdp4_loop (t, image, joints, logical_image, horizontal_eye_pos_pub, vertical_eye_pos_pub,
                right_shoulder_pitch, left_shoulder_pitch, initialization, bridge, np,
@@ -56,7 +61,8 @@ def cdp4_loop (t, image, joints, logical_image, horizontal_eye_pos_pub, vertical
                last_horizontal, last_vertical, previous_count, saccade_generator,
                horizontal_joint_limit, vertical_joint_limit, field_of_view,
                loop_counter, label, labels, eye_positions,
-               sequence, sequences, dataset_path, global_dataset_counter):
+               sequence, sequences, dataset_path, global_dataset_counter,
+               plotter1, plotter2, fig, plt):
 
     # initialize variables to persist
     if initialization.value is None:
@@ -81,6 +87,11 @@ def cdp4_loop (t, image, joints, logical_image, horizontal_eye_pos_pub, vertical
            tf.value = tensorflow
 
            from model_TS import TS
+
+           import matplotlib.pyplot
+           plt.value = matplotlib.pyplot
+           plt.value.switch_backend('Agg')
+           fig.value, _ = plt.value.subplots(1, figsize=(6, 6))
 
         except:
            clientLogger.info("Unable to import TensorFlow, did you change the path in the transfer function?")
@@ -138,7 +149,7 @@ def cdp4_loop (t, image, joints, logical_image, horizontal_eye_pos_pub, vertical
                            joints.value.position[vertical_index])
 
         # Save current image, eye positions, and label
-        if target_selection_idx.value != [31.5,31.5] and np.value.mod(loop_counter.value, 10) == 0:
+        if np.value.any(target_selection_idx.value) is not (Nrc.value-1)/2 and np.value.mod(loop_counter.value, 10) == 0:
             labels_dict = {'bed_room': 0, 'kitchen': 1, 'living_room': 2, 'office': 3}
             labels.value = np.value.append(labels.value, labels_dict[label.value])
             eye_positions.value = np.value.append(eye_positions.value, current_eye_pos)
@@ -150,7 +161,7 @@ def cdp4_loop (t, image, joints, logical_image, horizontal_eye_pos_pub, vertical
             np.value.save(dataset_path.value + "cdp4_dataset/eye_positions", eye_positions.value)
             np.value.save(dataset_path.value + "cdp4_dataset/labels", labels.value)
             np.value.save(dataset_path.value + "cdp4_dataset/sequences", sequences.value)
-            
+
             # save visible objects
             visible_objects = {}
             for item in logical_image.value.models:
@@ -190,6 +201,9 @@ def cdp4_loop (t, image, joints, logical_image, horizontal_eye_pos_pub, vertical
 
         global_salmap.value = global_salmap.value * global_weight.value
         global_weight.value = weight_decay(global_weight.value, decay_strength.value)
+
+        # global_salmap_norm = np.value.linalg.norm(global_salmap.value)
+        # global_salmap.value = global_salmap.value / global_salmap_norm
 
         ### TARGET SELECTION
         ts.value.I_ext = ts.value.read_saliency_NRP(global_salmap.value)
@@ -237,3 +251,43 @@ def cdp4_loop (t, image, joints, logical_image, horizontal_eye_pos_pub, vertical
 
         loop_counter.value = loop_counter.value + 1
         clientLogger.info("Counter: {}".format(loop_counter.value))
+
+        #------------------------------------------------------------------------
+        ### PLOTS
+        #
+        # # For plotting
+        # pixel_eye_pos_h = (Nrc.value-1)/2 - (Nrc.value-1) * new_eye_pos.value[0]/field_of_view.value*2
+        # pixel_eye_pos_v = (Nrc.value-1)/2 - (Nrc.value-1) * new_eye_pos.value[1]/field_of_view.value*2
+        #
+        # idx_rescaled0 = int(target_selection_idx.value[0]/Nrc.value*320)
+        # idx_rescaled1 = int(target_selection_idx.value[1]/Nrc.value*320)
+        # idx_rescaled = np.value.asarray([idx_rescaled0, idx_rescaled1])
+        # clientLogger.info("TS results: {}".format(target_selection_idx.value))
+        # clientLogger.info("TS idx rescaled: {}".format(idx_rescaled))
+        #
+        # # plot target selection input
+        # plt.value.clf()
+        # plt.value.imshow(ts.value.I_ext.reshape(Nrc.value, Nrc.value), cmap="gray")
+        # plt.value.plot(target_selection_idx.value[1],target_selection_idx.value[0],  '.r')
+        # plt.value.plot(pixel_eye_pos_h, pixel_eye_pos_v, '.g')
+        # fig.value.canvas.draw()
+        # plt.value.tight_layout()
+        #
+        # # convert and publish the image on a ROS topic
+        # img_data = np.value.fromstring(fig.value.canvas.tostring_rgb(), dtype=np.value.uint8)
+        # img_data = img_data.reshape(fig.value.canvas.get_width_height()[::-1] + (3,))
+        # ros_img = bridge.value.cv2_to_imgmsg(img_data, 'rgb8')
+        # plotter1.send_message(ros_img)
+        #
+        # # plot saliency map
+        # plt.value.clf()
+        # plt.value.imshow(global_salmap.value, cmap="gray")
+        # plt.value.axis("off")
+        # fig.value.canvas.draw()
+        # plt.value.tight_layout()
+        #
+        # # convert and publish the image on a ROS topic
+        # img_data = np.value.fromstring(fig.value.canvas.tostring_rgb(), dtype=np.value.uint8)
+        # img_data = img_data.reshape(fig.value.canvas.get_width_height()[::-1] + (3,))
+        # ros_img = bridge.value.cv2_to_imgmsg(img_data, 'rgb8')
+        # plotter2.send_message(ros_img)
