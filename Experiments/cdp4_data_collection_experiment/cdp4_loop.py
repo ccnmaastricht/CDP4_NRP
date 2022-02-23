@@ -12,8 +12,6 @@ from gazebo_ros_logical_camera.msg import LogicalCameraImage
 @nrp.MapRobotSubscriber("logical_image", Topic("/ariac/icub", LogicalCameraImage))
 @nrp.MapRobotPublisher("horizontal_eye_pos_pub", Topic("/icub/eye_version/pos", Float64))
 @nrp.MapRobotPublisher("vertical_eye_pos_pub", Topic("/icub/eye_tilt/pos", Float64))
-@nrp.MapRobotPublisher("right_shoulder_pitch", Topic("icub/r_shoulder_pitch/pos", Float64))
-@nrp.MapRobotPublisher("left_shoulder_pitch", Topic("icub/l_shoulder_pitch/pos", Float64))
 
 @nrp.MapVariable("initialization", initial_value=None)
 @nrp.MapVariable("bridge", initial_value=None)
@@ -50,24 +48,14 @@ from gazebo_ros_logical_camera.msg import LogicalCameraImage
 
 @nrp.Robot2Neuron()
 def cdp4_loop (t, image, joints, logical_image, horizontal_eye_pos_pub, vertical_eye_pos_pub,
-               right_shoulder_pitch, left_shoulder_pitch, initialization, bridge, np,
-               saliency_model, tf, global_salmap, global_weight, decay_strength,
-               ts, T_SIM, Nrc, target_selection_idx,
-               last_horizontal, last_vertical, previous_count, saccade_generator,
-               horizontal_joint_limit, vertical_joint_limit, field_of_view,
-               loop_counter, label, labels, eye_positions,
+               initialization, bridge, np, saliency_model, tf, global_salmap, global_weight,
+               decay_strength, ts, T_SIM, Nrc, target_selection_idx, last_horizontal,
+               last_vertical, previous_count, saccade_generator, horizontal_joint_limit,
+               vertical_joint_limit, field_of_view, loop_counter, label, labels, eye_positions,
                sequence, sequences, dataset_path, global_dataset_counter):
 
     # initialize variables to persist
     if initialization.value is None:
-
-        # Put the icub arms down to avoid having them in the image
-        right_shoulder_pitch.send_message(1.0)
-        left_shoulder_pitch.send_message(1.0)
-
-        # move the eyes to the center
-        horizontal_eye_pos_pub.send_message(0)
-        vertical_eye_pos_pub.send_message(0)
 
         try:
            import os

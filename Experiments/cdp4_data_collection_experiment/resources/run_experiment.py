@@ -16,7 +16,7 @@ from tf.transformations import quaternion_from_euler, euler_from_quaternion
 
 
 n_layouts = 3
-n_sequences = 8
+n_sequences = 6
 sequence_time = 800
 rooms = ['bed_room', 'kitchen', 'living_room', 'office']
 
@@ -89,33 +89,34 @@ if __name__ == '__main__':
         transfer_function = file.read()
 
     for room in rooms:
-        for sequence in range(int(n_sequences/4)):
-            print("##############")
-            print("{} iteration # {}".format(room, sequence + 1))
-            print("##############")
+        for layout in range(n_layouts):
+            for sequence in range(n_sequences):
+                print("##############")
+                print("{} iteration # {}".format(room, sequence + 1))
+                print("##############")
 
-            # parameterize transfer function with label and sequence nr.
-            tf = transfer_function % (room, str(sequence))
+                # parameterize transfer function with label and sequence nr.
+                tf = transfer_function % (room, str(layout))
 
-            # Copy a new empty environment sdf file
-            shutil.copyfile('environments/empty.sdf', '../virtual_room_tracking_icub.sdf')
-            
-            # populate environment's sdf with room's objects
-            insert_sdf_room(room)
+                # Copy a new empty environment sdf file
+                shutil.copyfile('environments/empty.sdf', '../virtual_room_tracking_icub.sdf')
+                
+                # populate environment's sdf with room's objects
+                insert_sdf_room(room, layout=layout)
 
-            sim = vc.launch_experiment('cdp4_data_collection_experiment_0')
-            sim.start()
-            time.sleep(20)
+                sim = vc.launch_experiment('cdp4_data_collection_experiment_0')
+                sim.start()
+                time.sleep(20)
 
-            print("adding transfer function ...")
-            sim.add_transfer_function(tf)
-            print("Done")
-            print("Collecting Data ...")
-            time.sleep(sequence_time)
+                print("adding transfer function ...")
+                sim.add_transfer_function(tf)
+                print("Done")
+                print("Collecting Data ...")
+                time.sleep(sequence_time)
 
-            sim.delete_transfer_function('cdp4_loop')
-            time.sleep(1)
+                sim.delete_transfer_function('cdp4_loop')
+                time.sleep(1)
 
-            print("Stopping experiment ...")
-            sim.stop()
-            time.sleep(10)
+                print("Stopping experiment ...")
+                sim.stop()
+                time.sleep(10)
