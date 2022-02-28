@@ -16,8 +16,10 @@ from tf.transformations import quaternion_from_euler, euler_from_quaternion
 
 
 n_layouts = 3
-n_sequences = 6
-sequence_time = 800
+n_icub_positions = 3
+n_sequences = 20
+n_images_per_sequence = 10
+sequence_time = 300
 rooms = ['bed_room', 'kitchen', 'living_room', 'office']
 
 
@@ -49,7 +51,7 @@ def modify_robot_initial_pose(pose):
     et.write('../experiment_configuration.exc')
 
 
-def insert_sdf_room(room_name, layout=None, layout_file='layout.yaml'):
+def insert_sdf_room(room_name, layout=None, icub_position=0, layout_file='layout.yaml'):
     path_to_room = os.getenv("HBP") + "/Models/FourRooms/" + room_name + '/'
     spawned_models = []
     with open(path_to_room + layout_file) as f:
@@ -63,7 +65,7 @@ def insert_sdf_room(room_name, layout=None, layout_file='layout.yaml'):
     for entity in yaml_file[layout]:
         if(entity["folder"] == "icub_model"):
             positions = entity["positions"]
-            position = random.choice(list(positions.values()))
+            position = list(positions.values())[icub_position]
             modify_robot_initial_pose(position)
         elif entity["has_subfolder"]:
             available_models = list(set(os.listdir(path_to_room + entity["folder"])) -
@@ -79,6 +81,13 @@ def insert_sdf_room(room_name, layout=None, layout_file='layout.yaml'):
     return
 
 
+def get_image_count():
+    all_saved_files = os.listdir('/home/bbpnrsoa/cdp4_dataset')
+    images = [i for i in all_saved_files if i.endswith('png') is True]
+
+    return len(images)
+
+
 if __name__ == '__main__':
     vc = VirtualCoach(environment='http://frontend:9000', storage_username='nrpuser',
                       storage_password='password')
@@ -88,35 +97,45 @@ if __name__ == '__main__':
     with open('../cdp4_loop.py', 'r') as file:
         transfer_function = file.read()
 
+    collected_samples = 0
+    global_sequence_counter = 1
+
     for room in rooms:
         for layout in range(n_layouts):
-            for sequence in range(n_sequences):
-                print("##############")
-                print("{} iteration # {}".format(room, sequence + 1))
-                print("##############")
+            for position in range(n_icub_positions):
+                for sequence in range(n_sequences):
+                    print("##############")
+                    print("{} iteration # {}".format(room, sequence + 1))
+                    print("##############")
 
-                # parameterize transfer function with label and sequence nr.
-                tf = transfer_function % (room, str(layout))
+                    # parameterize transfer function with label and sequence nr.
+                    tf = transfer_function % (room, str(layout), str(position), str(sequence))
 
-                # Copy a new empty environment sdf file
-                shutil.copyfile('environments/empty.sdf', '../virtual_room_tracking_icub.sdf')
-                
-                # populate environment's sdf with room's objects
-                insert_sdf_room(room, layout=layout)
+                    # Copy a new empty environment sdf file
+                    shutil.copyfile('environments/empty.sdf', '../virtual_room_tracking_icub.sdf')
+                    
+                    # populate environment's sdf with room's objects
+                    insert_sdf_room(room, layout=layout, icub_position=position)
 
-                sim = vc.launch_experiment('cdp4_data_collection_experiment_0')
-                sim.start()
-                time.sleep(20)
+                    sim = vc.launch_experiment('cdp4_data_collection_experiment_0')
+                    sim.start()
+                    time.sleep(10)
 
-                print("adding transfer function ...")
-                sim.add_transfer_function(tf)
-                print("Done")
-                print("Collecting Data ...")
-                time.sleep(sequence_time)
+                    print("adding transfer function ...")
+                    sim.add_transfer_function(tf)
+                    print("Done")
+                    print("Collecting Data ...")
+                    time.sleep(60)
+                    
+                    while (get_image_count() - collected_samples) < n_images_per_sequence:
+                        time.sleep(20)
 
-                sim.delete_transfer_function('cdp4_loop')
-                time.sleep(1)
+                    sim.delete_transfer_function('cdp4_loop')
+                    time.sleep(1)
 
-                print("Stopping experiment ...")
-                sim.stop()
-                time.sleep(10)
+                    print("Stopping experiment ...")
+                    sim.stop()
+                    time.sleep(10)
+
+                    collected_samples = get_image_count()
+                    global_sequence_counter += 1
