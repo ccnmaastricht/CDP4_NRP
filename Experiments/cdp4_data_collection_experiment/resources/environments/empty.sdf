@@ -301,26 +301,6 @@
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name="top_lamp_1">
-        <pose frame="">0.529 1.203 5.077 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name="top_lamp::body">
-          <pose frame="">0.529 1.203 5.077 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name="viz_poster_2_0">
-        <pose frame="">-3.023 1.974 1.911 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name="vr_poster_2::body">
-          <pose frame="">-3.023 1.974 1.911 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
       <model name="woodwall_0">
         <pose frame="">3.107 -1.98 0.014 0 -0 1.5708</pose>
         <scale>1 1 1</scale>
@@ -1185,54 +1165,6 @@
       <pose frame="">0 0 0 0 -0 0</pose>
       <pose frame="">0 0 0 0 -0 0</pose>
     </model>
-    <model name="top_lamp_1">
-      <static>1</static>
-      <link name="top_lamp::body">
-        <collision name="top_lamp-coll">
-          <pose frame="">0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://top_lamp/meshes/top_lamp-coll.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name="top_lamp">
-          <cast_shadows>0</cast_shadows>
-          <geometry>
-            <mesh>
-              <uri>model://top_lamp/meshes/top_lamp.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-        </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-        <pose frame="">0 0 0 0 -0 0</pose>
-        <enable_wind>0</enable_wind>
-      </link>
-      <pose frame="">0.529 1.203 5.077 0 -0 0</pose>
-      <pose frame="">0.529 1.203 5.077 0 -0 0</pose>
-      <pose frame="">0.529 1.203 5.077 0 -0 0</pose>
-    </model>
     <model name="concretewallhigh_0">
       <static>1</static>
       <link name="concretewallhigh::body">
@@ -1561,28 +1493,6 @@
       <pose frame="">3.51926 1.39842 5.97425 0 -0 0</pose>
       <pose frame="">3.51926 1.39842 5.97425 0 -0 0</pose>
       <pose frame="">3.51926 1.39842 5.97425 0 -0 0</pose>
-    </model>
-    <model name="viz_poster_2_0">
-      <static>1</static>
-      <link name="vr_poster_2::body">
-        <visual name="vr_poster_2">
-          <cast_shadows>1</cast_shadows>
-          <geometry>
-            <mesh>
-              <uri>model://viz_poster_2/meshes/viz_poster_2.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-        </visual>
-        <pose frame="">0 0 0 0 -0 0</pose>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-        <enable_wind>0</enable_wind>
-      </link>
-      <pose frame="">-5.27605 1.68818 1.91121 0 -0 0</pose>
-      <pose frame="">-5.27605 1.68818 1.91121 0 -0 0</pose>
-      <pose frame="">-5.27605 1.68818 1.91121 0 -0 0</pose>
     </model>
     <model name="highwindow_0">
       <static>1</static>
