@@ -16,7 +16,7 @@ from tf.transformations import quaternion_from_euler, euler_from_quaternion
 
 
 n_layouts = 3
-n_icub_positions = 3
+n_icub_positions = 4
 n_sequences = 20
 n_images_per_sequence = 10
 sequence_time = 300
