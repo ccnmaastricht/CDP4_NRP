@@ -19,7 +19,6 @@ n_layouts = 3
 n_icub_positions = 4
 n_sequences = 20
 n_images_per_sequence = 10
-sequence_time = 300
 rooms = ['bed_room', 'kitchen', 'living_room', 'office']
 
 
@@ -109,7 +108,7 @@ if __name__ == '__main__':
                     print("##############")
 
                     # parameterize transfer function with label and sequence nr.
-                    tf = transfer_function % (room, str(layout), str(position), str(sequence))
+                    tf = transfer_function % (room, str(layout), str(position), str(global_sequence_counter))
 
                     # Copy a new empty environment sdf file
                     shutil.copyfile('environments/empty.sdf', '../virtual_room_tracking_icub.sdf')
@@ -128,14 +127,14 @@ if __name__ == '__main__':
                     time.sleep(60)
                     
                     while (get_image_count() - collected_samples) < n_images_per_sequence:
-                        time.sleep(20)
+                        time.sleep(10)
 
                     sim.delete_transfer_function('cdp4_loop')
                     time.sleep(1)
 
                     print("Stopping experiment ...")
                     sim.stop()
-                    time.sleep(10)
+                    time.sleep(20)
 
                     collected_samples = get_image_count()
                     global_sequence_counter += 1

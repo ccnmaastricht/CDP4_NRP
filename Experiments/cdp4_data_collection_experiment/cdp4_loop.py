@@ -230,9 +230,9 @@ def cdp4_loop (t, image, joints, logical_image, horizontal_eye_pos_pub, vertical
             # save target selection output
             ts_output.value = np.value.append(ts_output.value, target_selection_result)
             timestamps.value = np.value.append(timestamps.value, t)
-            np.value.save(dataset_path.value + "cdp4_dataset/ts_output_{}".format(str(sequence.value).zfill(3)),
+            np.value.save(dataset_path.value + "cdp4_dataset/ts_output_{}".format(str(sequence.value).zfill(4)),
                     ts_output.value)
-            np.value.save(dataset_path.value + "cdp4_dataset/timestamps_{}".format(str(sequence.value).zfill(3)),
+            np.value.save(dataset_path.value + "cdp4_dataset/timestamps_{}".format(str(sequence.value).zfill(4)),
                     timestamps.value)
             
             # save visible objects (logical camera output)
