@@ -8,6 +8,7 @@ from gazebo_ros_logical_camera.msg import LogicalCameraImage
 
 
 @nrp.MapRobotSubscriber("image", Topic("/icub/icub_model/left_eye_camera/image_raw", Image))
+@nrp.MapRobotSubscriber("image_wide", Topic("/icub/icub_model/left_eye_camera_wide/image_raw", Image))
 @nrp.MapRobotSubscriber("joints", Topic("/icub/joints", JointState))
 @nrp.MapRobotSubscriber("logical_image", Topic("/ariac/icub", LogicalCameraImage))
 @nrp.MapRobotPublisher("horizontal_eye_pos_pub", Topic("/icub/eye_version/pos", Float64))
@@ -52,14 +53,18 @@ from gazebo_ros_logical_camera.msg import LogicalCameraImage
 @nrp.MapVariable("dataset_path", initial_value='/home/bbpnrsoa/')
 @nrp.MapVariable("global_dataset_counter", initial_value=0)
 
+@nrp.MapVariable("saveglobal_salmap",initial_value=None)
+@nrp.MapVariable("saveglobal_weight",initial_value=None)
+
 @nrp.Robot2Neuron()
-def cdp4_loop (t, image, joints, logical_image, horizontal_eye_pos_pub, vertical_eye_pos_pub,
-               initialization, bridge, np, saliency_model, tf, global_salmap, global_weight,
-               decay_strength, ts, T_SIM, Nrc, target_selection_idx, last_horizontal,
-               last_vertical, previous_count, saccade_generator, horizontal_joint_limit,
-               vertical_joint_limit, field_of_view, loop_counter, label, labels, layout, layouts,
-               icub_position, icub_positions, ts_output, timestamps, eye_positions, sequence,
-               sequences, dataset_path, global_dataset_counter):
+def cdp4_loop (t, image, image_wide, joints, logical_image, horizontal_eye_pos_pub,
+               vertical_eye_pos_pub, initialization, bridge, np, saliency_model, tf,
+               global_salmap, global_weight, decay_strength, ts, T_SIM, Nrc, target_selection_idx,
+               last_horizontal, last_vertical, previous_count, saccade_generator,
+               horizontal_joint_limit, vertical_joint_limit, field_of_view, loop_counter, label,
+               labels, layout, layouts, icub_position, icub_positions, ts_output, timestamps,
+               eye_positions, sequence, sequences, dataset_path, global_dataset_counter,
+               saveglobal_salmap, saveglobal_weight):
 
     # initialize variables to persist
     if initialization.value is None:
@@ -94,6 +99,9 @@ def cdp4_loop (t, image, joints, logical_image, horizontal_eye_pos_pub, vertical
         from utils import get_global_salmap
         global_salmap.value, global_weight.value = get_global_salmap(horizontal_joint_limit.value,
                                                                      res=320, fov=field_of_view.value)
+        saveglobal_salmap.value, saveglobal_weight.value = get_global_salmap(horizontal_joint_limit.value,
+                res=320, fov=field_of_view.value)
+
 
         ts.value = TS(PARAMS)
         _ = ts.value.simulate(500) # Simulate until TS reaches a stable value
@@ -128,6 +136,7 @@ def cdp4_loop (t, image, joints, logical_image, horizontal_eye_pos_pub, vertical
         import cv2
         import json
         from PIL import Image
+        cv2_img_wide_original = bridge.value.imgmsg_to_cv2(image_wide.value, 'rgb8')
         cv2_img_original = bridge.value.imgmsg_to_cv2(image.value, 'rgb8')
 
         horizontal_eye_joint_name = 'eye_version'
@@ -140,14 +149,14 @@ def cdp4_loop (t, image, joints, logical_image, horizontal_eye_pos_pub, vertical
 
 
         # Convert ROS image to CV and resize
-        cv2_img = cv2.resize(cv2_img_original, (320, 320))
+        cv2_img = cv2.resize(cv2_img_wide_original, (320, 320))
 
         input_img = np.value.expand_dims(cv2_img, 0)
         input_img = tf.value.convert_to_tensor(input_img, dtype='float')
         saliency_map = saliency_model.value(input_img)['out'].numpy().squeeze()
         #saliency_map = np.value.power(saliency_map, 2)
 
-        from utils import rad2ind, add_mat2mat, weight_decay
+        from utils import rad2ind, add_mat2mat, weight_decay, save_add_mat2mat
         px_ind_vert = -rad2ind(current_eye_pos[1], vertical_joint_limit.value,
                                 fov=field_of_view.value)
         px_ind_hori = -rad2ind(current_eye_pos[0], horizontal_joint_limit.value,
@@ -160,6 +169,12 @@ def cdp4_loop (t, image, joints, logical_image, horizontal_eye_pos_pub, vertical
 
         global_salmap.value = global_salmap.value * global_weight.value
         global_weight.value = weight_decay(global_weight.value, decay_strength.value)
+
+        # Generate global saliency map without decay or clipping for spatial statistics
+        saveglobal_salmap.value, saveglobal_weight.value = save_add_mat2mat(saveglobal_salmap.value,
+                                                                            saveglobal_weight.value,
+                                                                            saliency_map, px_ind)
+
 
         ### TARGET SELECTION
         ts.value.I_ext = ts.value.read_saliency_NRP(global_salmap.value)
@@ -218,9 +233,13 @@ def cdp4_loop (t, image, joints, logical_image, horizontal_eye_pos_pub, vertical
             layouts.value = np.value.append(layouts.value, int(layout.value))
             icub_positions.value = np.value.append(icub_positions.value, int(icub_position.value))
             im = Image.fromarray(cv2_img_original)
-            name = str(global_dataset_counter.value).zfill(4)
+            name = str(global_dataset_counter.value).zfill(5)
             im_name = "{}.png".format(name)
             im.save(dataset_path.value + "cdp4_dataset/" + im_name)
+
+            # Save global saliency map w/o decay or clipping
+            global_salmap_name = 'globalsaliency_' + str(global_dataset_counter.value).zfill(5)
+            np.value.save(dataset_path.value + "cdp4_dataset/" + global_salmap_name, saveglobal_salmap.value)
             np.value.save(dataset_path.value + "cdp4_dataset/eye_positions", eye_positions.value)
             np.value.save(dataset_path.value + "cdp4_dataset/labels", labels.value)
             np.value.save(dataset_path.value + "cdp4_dataset/sequences", sequences.value)
@@ -230,9 +249,9 @@ def cdp4_loop (t, image, joints, logical_image, horizontal_eye_pos_pub, vertical
             # save target selection output
             ts_output.value = np.value.append(ts_output.value, target_selection_result)
             timestamps.value = np.value.append(timestamps.value, t)
-            np.value.save(dataset_path.value + "cdp4_dataset/ts_output_{}".format(str(sequence.value).zfill(4)),
+            np.value.save(dataset_path.value + "cdp4_dataset/ts_output_{}".format(str(sequence.value).zfill(5)),
                     ts_output.value)
-            np.value.save(dataset_path.value + "cdp4_dataset/timestamps_{}".format(str(sequence.value).zfill(4)),
+            np.value.save(dataset_path.value + "cdp4_dataset/timestamps_{}".format(str(sequence.value).zfill(5)),
                     timestamps.value)
             
             # save visible objects (logical camera output)
