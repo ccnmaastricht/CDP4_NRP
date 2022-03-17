@@ -23,7 +23,6 @@ def get_global_salmap(eye_limit, res=320, fov=1.13):
 
     return global_salmap_fn, global_weight_fn
 
-
 # to be used when filling global salmap (rad = eye position)
 def rad2ind(rad, eye_limit, res=320, fov=1.13):
     assert np.abs(rad) <= eye_limit, 'input larger than eye limit'
@@ -64,6 +63,26 @@ def add_mat2mat(global_salmap_fn, global_weight_fn, saliency_map, ind):
                      ind[1] - half_size: ind[1] + half_size] = 1
 
     global_salmap_fn = np.clip(global_salmap_fn, 0, 1)
+
+
+    return global_salmap_fn , global_weight_fn
+
+
+def save_add_mat2mat(global_salmap_fn, global_weight_fn, saliency_map, ind):
+    half_size = int(saliency_map.shape[0] / 2)
+
+    old_vals = global_salmap_fn[ind[0] - half_size: ind[0] + half_size,
+                                ind[1] - half_size: ind[1] + half_size]
+
+    new_vals = old_vals + saliency_map
+
+    global_salmap_fn[ind[0] - half_size: ind[0] + half_size,
+                     ind[1] - half_size: ind[1] + half_size] = new_vals
+
+    global_weight_fn[ind[0] - half_size: ind[0] + half_size,
+                     ind[1] - half_size: ind[1] + half_size] = 1
+
+    # global_salmap_fn = np.clip(global_salmap_fn, 0, 1)
 
 
     return global_salmap_fn , global_weight_fn

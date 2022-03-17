@@ -301,26 +301,6 @@
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name="top_lamp_1">
-        <pose frame="">0.529 1.203 5.077 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name="top_lamp::body">
-          <pose frame="">0.529 1.203 5.077 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name="viz_poster_2_0">
-        <pose frame="">-3.023 1.974 1.911 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name="vr_poster_2::body">
-          <pose frame="">-3.023 1.974 1.911 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
       <model name="woodwall_0">
         <pose frame="">3.107 -1.98 0.014 0 -0 1.5708</pose>
         <scale>1 1 1</scale>
@@ -1185,54 +1165,6 @@
       <pose frame="">0 0 0 0 -0 0</pose>
       <pose frame="">0 0 0 0 -0 0</pose>
     </model>
-    <model name="top_lamp_1">
-      <static>1</static>
-      <link name="top_lamp::body">
-        <collision name="top_lamp-coll">
-          <pose frame="">0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://top_lamp/meshes/top_lamp-coll.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode />
-            </contact>
-            <bounce />
-            <friction>
-              <torsional>
-                <ode />
-              </torsional>
-              <ode />
-            </friction>
-          </surface>
-        </collision>
-        <visual name="top_lamp">
-          <cast_shadows>0</cast_shadows>
-          <geometry>
-            <mesh>
-              <uri>model://top_lamp/meshes/top_lamp.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-        </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-        <pose frame="">0 0 0 0 -0 0</pose>
-        <enable_wind>0</enable_wind>
-      </link>
-      <pose frame="">0.529 1.203 5.077 0 -0 0</pose>
-      <pose frame="">0.529 1.203 5.077 0 -0 0</pose>
-      <pose frame="">0.529 1.203 5.077 0 -0 0</pose>
-    </model>
     <model name="concretewallhigh_0">
       <static>1</static>
       <link name="concretewallhigh::body">
@@ -1561,28 +1493,6 @@
       <pose frame="">3.51926 1.39842 5.97425 0 -0 0</pose>
       <pose frame="">3.51926 1.39842 5.97425 0 -0 0</pose>
       <pose frame="">3.51926 1.39842 5.97425 0 -0 0</pose>
-    </model>
-    <model name="viz_poster_2_0">
-      <static>1</static>
-      <link name="vr_poster_2::body">
-        <visual name="vr_poster_2">
-          <cast_shadows>1</cast_shadows>
-          <geometry>
-            <mesh>
-              <uri>model://viz_poster_2/meshes/viz_poster_2.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-        </visual>
-        <pose frame="">0 0 0 0 -0 0</pose>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-        <enable_wind>0</enable_wind>
-      </link>
-      <pose frame="">-5.27605 1.68818 1.91121 0 -0 0</pose>
-      <pose frame="">-5.27605 1.68818 1.91121 0 -0 0</pose>
-      <pose frame="">-5.27605 1.68818 1.91121 0 -0 0</pose>
     </model>
     <model name="highwindow_0">
       <static>1</static>
@@ -1914,5 +1824,5 @@
       <pose frame="">-5.47636 -3.31669 0 0 -0 1.5708</pose>
       <pose frame="">-5.47636 -3.31669 0 0 -0 1.5708</pose>
     </model>
-  <include><static>true</static><uri>model://OfficeTable5</uri><pose>-1.5 0.0 0.0 0.0 0.0 4.71238898038469</pose></include><include><static>true</static><uri>model://OfficeChair11</uri><pose>-0.75 0.0 0.0 0.0 0.0 1.5707963267948966</pose></include><include><static>true</static><uri>model://OfficeTable1</uri><pose>0.0 0.0 0.0 0.0 0.0 4.71238898038469</pose></include><include><static>true</static><uri>model://Laptop1</uri><pose>0.0 0.0 0.7 0.0 0.0 1.5707963267948966</pose></include><include><static>true</static><uri>model://OfficeChair7</uri><pose>0.8 0.0 0.0 0.0 0.0 1.5707963267948966</pose></include><include><static>true</static><uri>model://OfficeTable0</uri><pose>1.5 0.0 0.0 0.0 0.0 4.71238898038469</pose></include><include><static>true</static><uri>model://OfficeChair9</uri><pose>2.5 0.0 0.0 0.0 0.0 1.5707963267948966</pose></include><include><static>true</static><uri>model://Bookshelf6</uri><pose>-2.2 -2.5 0.0 0.0 0.0 0.0</pose></include><include><static>true</static><uri>model://Bookshelf4</uri><pose>-1.0 2.8 0.0 0.0 0.0 3.141592653589793</pose></include></world>
+  <include><static>true</static><uri>model://Bed13</uri><pose>-0.4 1.0 0.0 0.0 0.0 3.141592653589793</pose></include><include><static>true</static><uri>model://BedroomChair14</uri><pose>-0.9 -1.0 0.0 0.0 0.0 3.141592653589793</pose></include><include><static>true</static><uri>model://NightStand3</uri><pose>-1.8 1.7 0.0 0.0 0.0 3.141592653589793</pose></include><include><static>true</static><uri>model://ReadingDesk8</uri><pose>-0.9 -2.0 0.0 0.0 0.0 0.0</pose></include><include><static>true</static><uri>model://Wardrobe2</uri><pose>1.4 1.6 0.0 0.0 0.0 3.141592653589793</pose></include></world>
 </sdf>
